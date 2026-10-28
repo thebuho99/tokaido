@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Las cincuenta y tres estaciones del Tōkaidō de Hiroshige, posta por posta.">
+<link rel="icon" href="img/icono.png">
+<style>body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}[hidden]{display:none!important}</style>
+<title>El viaje del Tōkaidō</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700;800&family=Shippori+Mincho:wght@400;600&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: un rollo que se lee de arriba abajo; cada capítulo abre con una franja de bokashi
+   como el cielo de las láminas, y el viaje es una tira de postas con un mapa fijo que sigue al viajero. */
+:root {
+  --washi: #eee5cf;
+  --washi-2: #e4d8bc;
+  --raised: #f6efde;
+  --sumi: #2a2521;
+  --sumi-2: #5b5247;
+  --hair: #cbbd9c;
+  --ai: #2c5a7b;
+  --ai-soft: #a9c3cf;
+  --beni: #b0392b;
+  --bokashi: rgba(214, 120, 96, .78);
+  --bokashi-0: rgba(214, 120, 96, 0);
+  --grain-op: .22;
+  --sea: #cfdcd8;
+  --land: #f4ecd9;
+  --coast: #8c806b;
+  --shadow: 0 1px 0 rgba(60, 45, 25, .08), 0 10px 30px -18px rgba(60, 45, 25, .45);
+  --f-display: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --f-body: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", Georgia, serif;
+  --f-label: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
+  --step--1: .82rem;
+  --step-0: 1.06rem;
+  --step-1: 1.3rem;
+  --step-2: 1.7rem;
+  --step-3: clamp(2.2rem, 7vw, 3.6rem);
+  --step-4: clamp(2.8rem, 11vw, 5.4rem);
+  --gutter: clamp(16px, 4.5vw, 40px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --washi: #111b24; --washi-2: #182532; --raised: #1c2a37; --sumi: #ece2cb; --sumi-2: #ada38e;
+    --hair: #2e4152; --ai: #93bad3; --ai-soft: #35546a; --beni: #e2786a;
+    --bokashi: rgba(150, 72, 62, .7); --bokashi-0: rgba(150, 72, 62, 0); --grain-op: .1;
+    --sea: #0b141c; --land: #1e2c39; --coast: #50667a;
+    --shadow: 0 10px 30px -18px rgba(0, 0, 0, .8);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --washi: #111b24; --washi-2: #182532; --raised: #1c2a37; --sumi: #ece2cb; --sumi-2: #ada38e;
+  --hair: #2e4152; --ai: #93bad3; --ai-soft: #35546a; --beni: #e2786a;
+  --bokashi: rgba(150, 72, 62, .7); --bokashi-0: rgba(150, 72, 62, 0); --grain-op: .1;
+    --sea: #0b141c; --land: #1e2c39; --coast: #50667a;
+  --shadow: 0 10px 30px -18px rgba(0, 0, 0, .8);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--washi);
+  color: var(--sumi);
+  font-family: var(--f-body);
+  font-size: var(--step-0);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  opacity: var(--grain-op); mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .2 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+main, header, footer { position: relative; z-index: 1; }
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--ai); text-underline-offset: .2em; }
+:focus-visible { outline: 2px solid var(--beni); outline-offset: 3px; }
+[lang="ja"] { font-family: var(--f-display); }
+
+.wrap { max-width: 1120px; margin-inline: auto; padding-inline: var(--gutter); }
+.prose { max-width: 62ch; }
+.prose p { margin: 0 0 1em; }
+
+.band {
+  height: clamp(56px, 9vw, 96px);
+  background: linear-gradient(to bottom, var(--bokashi), var(--bokashi-0));
+}
+.band.ai { background: linear-gradient(to bottom, rgba(44, 90, 123, .55), rgba(44, 90, 123, 0)); }
+
+.eyebrow {
+  font-family: var(--f-label); font-weight: 700; font-size: var(--step--1);
+  letter-spacing: .14em; text-transform: uppercase; color: var(--sumi-2); margin: 0 0 .6rem;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+h2 { font-size: var(--step-3); font-weight: 800; letter-spacing: -.01em; }
+.chapter { padding-block: 0 clamp(48px, 8vw, 96px); }
+.chapter-head { display: grid; gap: .4rem; margin-block: clamp(20px, 4vw, 40px) clamp(20px, 3vw, 32px); }
+.chapter-head .ja-mark { font-size: var(--step-1); color: var(--beni); }
+
+/* ---------- portada */
+.hero { padding-bottom: clamp(32px, 6vw, 72px); }
+.hero-grid {
+  display: grid; gap: clamp(24px, 4vw, 48px); align-items: center;
+  grid-template-columns: 1fr;
+  margin-top: clamp(8px, 2vw, 24px);
+}
+@media (min-width: 900px) { .hero-grid { grid-template-columns: 1fr 1.08fr; } }
+.hero-text { min-width: 0; position: relative; }
+.hero h1 { font-size: var(--step-4); font-weight: 800; letter-spacing: -.02em; }
+.hero h1 span { display: block; color: var(--ai); }
+.lead { font-size: var(--step-1); line-height: 1.55; max-width: 34ch; margin: 1rem 0 1.4rem; color: var(--sumi); }
+.cta { display: flex; flex-wrap: wrap; gap: .7rem; }
+.btn {
+  font-family: var(--f-label); font-weight: 700; font-size: .95rem; letter-spacing: .02em;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.1rem; border-radius: 2px; text-decoration: none;
+  border: 1.5px solid var(--sumi); color: var(--sumi); background: transparent; cursor: pointer;
+}
+.btn.primary { background: var(--sumi); color: var(--washi); }
+.btn:hover { border-color: var(--beni); }
+.btn.primary:hover { background: var(--beni); border-color: var(--beni); color: #fff; }
+
+.hero-card { margin: 0; position: relative; }
+.hero-card img {
+  width: 100%; aspect-ratio: 140 / 90; object-fit: cover;
+  box-shadow: var(--shadow); transform: rotate(-.6deg);
+}
+.hero-card figcaption { margin-top: .9rem; font-size: var(--step--1); font-family: var(--f-label); color: var(--sumi-2); }
+.hero-card figcaption b { color: var(--beni); }
+.tate {
+  writing-mode: vertical-rl; font-family: var(--f-display); font-weight: 800;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem); letter-spacing: .2em; color: var(--sumi);
+  position: absolute; top: 0; right: 0;
+}
+.tate small { font-size: .55em; color: var(--beni); letter-spacing: .1em; margin-top: .6em; }
+.hero-text { padding-right: 2.6rem; }
+
+.facts {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0;
+  margin: clamp(32px, 5vw, 56px) 0 0; border-top: 1.5px solid var(--sumi);
+}
+@media (min-width: 720px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.facts div { padding: 1rem .9rem 0 0; border-bottom: 1px solid var(--hair); padding-bottom: 1rem; }
+.facts dt { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.25rem, 5.6vw, 1.7rem); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.facts dd { margin: .1rem 0 0; font-family: var(--f-label); font-size: var(--step--1); color: var(--sumi-2); line-height: 1.4; }
+
+/* ---------- el cuadro */
+.board-tools { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; margin-bottom: 1rem; font-family: var(--f-label); font-size: .92rem; color: var(--sumi-2); }
+.switch { display: inline-flex; align-items: center; gap: .5rem; cursor: pointer; color: var(--sumi); font-weight: 700; }
+.switch input { width: 1.1rem; height: 1.1rem; accent-color: var(--beni); }
+.board-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.board { position: relative; min-width: 560px; box-shadow: var(--shadow); background: #ddd; }
+.board img { width: 100%; height: auto; }
+.hot {
+  position: absolute; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer;
+  display: grid; place-items: center;
+}
+.hot:hover, .hot:focus-visible { background: rgba(255, 250, 235, .18); outline: 2px solid var(--beni); outline-offset: -2px; }
+.hot span {
+  font-family: var(--f-label); font-weight: 700; font-size: .78rem; font-variant-numeric: tabular-nums;
+  min-width: 1.9em; padding: .1em .35em; background: rgba(42, 37, 33, .82); color: #f4ead6; border-radius: 2px;
+  opacity: 0; transition: opacity .2s;
+}
+.show-nums .hot span { opacity: 1; }
+.hot.is-56 span { background: #b0392b; }
+.board-note { font-size: var(--step--1); font-family: var(--f-label); color: var(--sumi-2); margin-top: .7rem; }
+
+/* ---------- el camino */
+.notes { display: grid; gap: 1px; background: var(--hair); border: 1px solid var(--hair); margin-top: 1.6rem; }
+@media (min-width: 760px) { .notes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.note { background: var(--washi); padding: 1.1rem 1.1rem 1.2rem; min-width: 0; }
+.note h3 { font-size: var(--step-1); margin-bottom: .35rem; }
+.note p { margin: 0; font-size: .98rem; }
+.note .where { font-family: var(--f-label); font-size: var(--step--1); color: var(--ai); font-weight: 700; letter-spacing: .04em; margin-bottom: .3rem; }
+
+/* ---------- el viaje */
+.journey { display: grid; gap: 0 clamp(24px, 4vw, 48px); grid-template-columns: 1fr; }
+@media (min-width: 960px) { .journey { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); } }
+.map-pane {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+  background: var(--washi); padding-block: .6rem .5rem; border-bottom: 1px solid var(--hair);
+  align-self: start;
+}
+@media (min-width: 960px) { .map-pane { top: calc(env(safe-area-inset-top, 0px) + 24px); border-bottom: 0; padding-top: 0; } }
+.map-pane svg { width: 100%; height: auto; display: block; overflow: hidden; }
+.seabg { fill: var(--sea); }
+.land { fill: var(--land); stroke: var(--coast); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.land.nb { opacity: .6; }
+
+/* mapa con zoom: de Japón entero al camino */
+.zoom { margin: clamp(28px, 4vw, 44px) 0 0; }
+.zoom-stage { position: relative; aspect-ratio: 4 / 3.6; max-width: 100%; overflow: hidden; background: var(--sea); box-shadow: var(--shadow); }
+@media (min-width: 760px) { .zoom-stage { aspect-ratio: 16 / 9; } }
+.zoom-stage > #zsvg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.zoom-cap { position: absolute; left: 10px; top: 10px; display: grid; gap: 2px; pointer-events: none; max-width: calc(100% - 20px); }
+.zoom-cap b, .zoom-cap span { background: color-mix(in srgb, var(--washi) 88%, transparent); padding: .15rem .5rem; width: fit-content; }
+.zoom-cap b { font-family: var(--f-display); font-size: clamp(1.05rem, 3.4vw, 1.45rem); font-weight: 800; }
+.zoom-cap span { font-family: var(--f-label); font-size: var(--step--1); color: var(--sumi-2); font-variant-numeric: tabular-nums; }
+.zoom-inset { position: absolute; right: 10px; bottom: 10px; width: 24%; max-width: 150px; aspect-ratio: 1; border: 1px solid var(--coast); background: var(--sea); opacity: 0; transition: opacity .6s; }
+.zoom-inset.on { opacity: 1; }
+.zoom-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .8rem; font-family: var(--f-label); font-size: var(--step--1); color: var(--sumi-2); }
+.zl { font-family: var(--f-label); font-weight: 700; fill: var(--sumi-2); paint-order: stroke; stroke: var(--sea); stroke-linejoin: round; }
+.zl.big { font-family: var(--f-display); fill: var(--sumi); font-weight: 800; letter-spacing: .08em; }
+.zl.it { font-style: italic; font-weight: 500; }
+.zl.now { fill: var(--beni); font-family: var(--f-display); }
+.zrect { fill: none; stroke: var(--beni); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.zseg { stroke: var(--beni); stroke-width: 3; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.zseg.sea { stroke: var(--ai); stroke-dasharray: 5 5; stroke-width: 2.2; }
+.zdot { fill: var(--washi); stroke: var(--sumi); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
+.zdot.on { fill: var(--beni); stroke: var(--beni); }
+.zpin { fill: var(--sumi); }
+.sheet .credit { font-family: var(--f-label); font-size: var(--step--1); color: var(--sumi-2); margin: .45rem 0 0; }
+.map-now { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; font-family: var(--f-label); min-height: 1.6rem; }
+.map-now b { font-family: var(--f-display); font-size: 1.1rem; }
+.map-now span { font-size: var(--step--1); color: var(--sumi-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.route { fill: none; stroke: var(--sumi); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.route.sea { stroke: var(--ai); stroke-dasharray: 7 7; stroke-width: 2.5; }
+.route.done { stroke: var(--beni); stroke-width: 5; }
+.stn { fill: var(--washi); stroke: var(--sumi); stroke-width: 2; cursor: pointer; }
+.stn.on { fill: var(--beni); stroke: var(--beni); }
+.numlbl { font-family: var(--f-label); font-weight: 700; font-size: 26px; fill: var(--beni); paint-order: stroke; stroke: var(--sea); stroke-width: 7px; stroke-linejoin: round; font-variant-numeric: tabular-nums; }
+.legend { font-family: var(--f-label); font-size: 22px; fill: var(--sumi-2); }
+.maplbl { font-family: var(--f-label); font-size: 26px; fill: var(--sumi-2); font-weight: 700; }
+.maplbl.ja { font-family: var(--f-display); font-size: 30px; fill: var(--sumi); }
+.lake { fill: var(--ai-soft); }
+.fuji { fill: var(--ai); }
+.fuji-snow { fill: var(--washi); }
+.traveler { fill: var(--beni); transition: transform .5s cubic-bezier(.3, .7, .2, 1); }
+@media (prefers-reduced-motion: reduce) { .traveler { transition: none; } }
+
+.legs { min-width: 0; }
+.leg { padding-top: 2.2rem; }
+.leg-head { display: grid; gap: .2rem; border-top: 1.5px solid var(--sumi); padding-top: .8rem; margin-bottom: .4rem; }
+.leg-head .eyebrow { margin: 0; color: var(--beni); }
+.leg-head h3 { font-size: var(--step-2); font-weight: 800; }
+.leg-head p { margin: 0; color: var(--sumi-2); font-size: .98rem; }
+.stop {
+  display: grid; grid-template-columns: minmax(96px, 34%) minmax(0, 1fr); gap: .9rem 1rem;
+  padding-block: 1.1rem; border-bottom: 1px solid var(--hair); scroll-margin-top: 140px;
+}
+.stop.is-on .stop-num { color: var(--beni); }
+.thumb { padding: 0; border: 0; background: none; cursor: zoom-in; align-self: start; }
+.thumb img { width: 100%; aspect-ratio: 140 / 90; object-fit: cover; box-shadow: var(--shadow); }
+.stop-body { min-width: 0; }
+.stop-num { font-family: var(--f-label); font-size: var(--step--1); font-weight: 700; letter-spacing: .04em; color: var(--sumi-2); margin: 0 0 .15rem; font-variant-numeric: tabular-nums; }
+.stop h4 { font-family: var(--f-display); font-size: var(--step-1); font-weight: 700; margin: 0; line-height: 1.2; }
+.stop h4 [lang="ja"] { color: var(--sumi-2); font-weight: 500; margin-left: .35em; font-size: .9em; }
+.stop-title { margin: .25rem 0 .35rem; font-size: .95rem; color: var(--ai); line-height: 1.45; }
+.stop-desc { margin: 0; font-size: .98rem; line-height: 1.6; }
+.stop-pos { margin: .4rem 0 0; font-family: var(--f-label); font-size: var(--step--1); color: var(--sumi-2); }
+@media (max-width: 520px) {
+  .stop { grid-template-columns: 1fr; }
+  .thumb { max-width: 260px; }
+}
+
+/* ---------- planchas */
+.press { display: grid; gap: clamp(20px, 4vw, 48px); grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 900px) { .press { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); } }
+.press-stage { position: relative; aspect-ratio: 140 / 90; box-shadow: var(--shadow); background: #efe4cb; max-width: 100%; }
+.press-stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .45s ease; }
+.press-stage img.on { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .press-stage img { transition: none; } }
+.steps { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+@media (min-width: 560px) { .steps { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+.steps button {
+  width: 100%; text-align: left; font-family: var(--f-label); font-size: .82rem; line-height: 1.25; font-weight: 700;
+  padding: .55rem .55rem .6rem; border: 1px solid var(--hair); background: var(--raised); color: var(--sumi); cursor: pointer; border-radius: 2px;
+}
+.steps button small { display: block; color: var(--sumi-2); font-weight: 500; font-variant-numeric: tabular-nums; }
+.steps button[aria-pressed="true"] { border-color: var(--beni); box-shadow: inset 0 -3px 0 var(--beni); }
+.press-run { margin-top: .9rem; }
+
+/* ---------- hiroshige y postal 56 */
+.two { display: grid; gap: clamp(20px, 4vw, 56px); grid-template-columns: 1fr; }
+@media (min-width: 900px) { .two { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.quote-box { border-left: 3px solid var(--beni); padding: .2rem 0 .2rem 1rem; color: var(--sumi-2); font-size: .98rem; }
+.seal-inline { display: inline-grid; place-items: center; width: 1.6em; height: 2.1em; background: var(--beni); color: #f4ead6; font-family: var(--f-display); font-weight: 800; vertical-align: -.5em; margin-inline: .15em; font-size: .9em; }
+
+footer { border-top: 1.5px solid var(--sumi); padding-block: 1.6rem 2.6rem; font-family: var(--f-body); font-size: var(--step--1); color: var(--sumi-2); }
+footer p { margin: 0 0 .5rem; max-width: 80ch; }
+
+/* ---------- ficha */
+.scrim { position: fixed; inset: 0; background: rgba(15, 12, 10, .55); z-index: 40; }
+.sheet {
+  position: fixed; z-index: 41; left: 0; right: 0; bottom: 0;
+  max-height: 92vh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--raised); color: var(--sumi);
+  border-top: 4px solid var(--beni);
+  padding: 1rem var(--gutter) calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -20px 50px -20px rgba(0, 0, 0, .5);
+}
+@media (min-width: 900px) {
+  .sheet { left: auto; top: 0; width: min(520px, 46vw); max-height: none; border-top: 0; border-left: 4px solid var(--beni); padding-top: calc(1.4rem + env(safe-area-inset-top, 0px)); }
+}
+.sheet-bar { display: flex; justify-content: space-between; align-items: center; gap: .5rem; margin-bottom: .8rem; }
+.sheet-bar .eyebrow { margin: 0; color: var(--beni); }
+.icon-btn { font-family: var(--f-label); font-weight: 700; font-size: .9rem; border: 1px solid var(--hair); background: var(--washi); color: var(--sumi); padding: .45rem .75rem; border-radius: 2px; cursor: pointer; }
+.sheet img { width: 100%; aspect-ratio: 140 / 90; object-fit: cover; box-shadow: var(--shadow); }
+.sheet h3 { font-size: var(--step-2); margin-top: 1rem; font-weight: 800; }
+.sheet h3 [lang="ja"] { font-weight: 500; color: var(--sumi-2); margin-left: .3em; font-size: .8em; }
+.sheet .stop-title { font-size: 1rem; }
+.sheet-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .6rem; margin-top: 1rem; font-family: var(--f-label); font-size: var(--step--1); }
+.sheet-meta div { border-top: 1px solid var(--hair); padding-top: .4rem; }
+.sheet-meta b { display: block; font-size: .95rem; color: var(--sumi); font-variant-numeric: tabular-nums; }
+.sheet-nav { display: flex; justify-content: space-between; gap: .6rem; margin-top: 1.2rem; }
+</style>
+
+</head>
+<body>
+<header class="hero">
+  <div class="band" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Utagawa Hiroshige · 1833-1834</p>
+        <h1>El viaje del <span>Tōkaidō</span></h1>
+        <p class="lead">Cincuenta y cinco láminas de Edo a Kioto por el camino más transitado del Japón antiguo. Tocá una postal del cuadro, seguí el viaje posta por posta o mirá cómo se imprimía una lámina.</p>
+        <nav class="cta" aria-label="Secciones">
+          <a class="btn primary" href="#cuadro">Buscar una postal</a>
+          <a class="btn" href="#viaje">Empezar el viaje</a>
+        </nav>
+        <p class="tate" lang="ja" title="Tōkaidō gojūsan tsugi: Las cincuenta y tres estaciones del Tōkaidō">東海道五拾三次<small>之内</small></p>
+      </div>
+      <figure class="hero-card">
+        <img src="img/postal56b.jpg" width="1400" height="900" alt="Postal 56: dos viajeros en una loma junto a un pino señalan el Fuji del otro lado de la bahía">
+        <figcaption><b>Postal 56.</b> Fin del camino, vista del atardecer. La última del cuadro, la que trae a esta página.</figcaption>
+      </figure>
+    </div>
+    <dl class="facts">
+      <div><dt>≈ 492 km</dt><dd>de Nihonbashi, en Edo, al puente de Sanjō, en Kioto</dd></div>
+      <div><dt>53 postas</dt><dd>shukuba, pueblos para comer, dormir y cambiar caballos</dd></div>
+      <div><dt>55 láminas</dt><dd>las 53 postas más la salida y la llegada</dd></div>
+      <div><dt>≈ 2 semanas</dt><dd>lo que llevaba recorrerlo a pie</dd></div>
+    </dl>
+  </div>
+</header>
+
+<main>
+  <section id="cuadro" class="chapter">
+    <div class="band ai" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">El cuadro</p>
+        <h2>Cincuenta y seis postales, en el orden del camino</h2>
+      </div>
+      <div class="prose"><p>Ocho columnas de siete postales. El cuadro se lee por columnas, de arriba hacia abajo y empezando por la izquierda: Nihonbashi arriba a la izquierda, Kioto al pie de la última columna y, debajo, la postal 56.</p></div>
+      <div class="board-tools">
+        <label class="switch" for="toggle-nums"><input type="checkbox" id="toggle-nums"> Mostrar el número de cada lámina</label>
+        <span>Tocá una postal para ver qué muestra.</span>
+      </div>
+      <div class="board-scroll">
+        <div class="board" id="board">
+          <img src="img/cuadro2.jpg" width="1768" height="1016" alt="Las 55 láminas de la serie en el orden del cuadro, con la postal 56 en el rincón inferior derecho">
+        </div>
+      </div>
+      <p class="board-note">En pantallas chicas, el cuadro se puede deslizar hacia los costados.</p>
+    </div>
+  </section>
+
+  <section id="camino" class="chapter">
+    <div class="band" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">Contexto</p>
+        <h2>El camino del mar del este</h2>
+        <p class="ja-mark" lang="ja">東海道</p>
+      </div>
+      <div class="prose">
+        <p>Tōkaidō significa, literalmente, camino del mar del este. Unía Edo, la ciudad del shogún (hoy Tokio), con Kioto, donde vivía el emperador: unos 492 km siguiendo la costa del Pacífico. Tokugawa Ieyasu lo organizó en 1601 como una red de postas, los <i>shukuba</i>, donde los viajeros comían, dormían y cambiaban caballos y cargadores. En 1624 se sumó la última, Shōno, y quedaron 53.</p>
+        <p>Por el camino pasaban señores feudales con sus comitivas, porque la ley los obligaba a vivir un año en Edo y otro en sus tierras; también mercaderes, peregrinos, monjes y correos a pie. Casi todos caminaban, y el viaje completo llevaba unas dos semanas.</p>
+      </div>
+      <figure class="zoom" id="zoom">
+        <div class="zoom-stage" id="zstage">
+          <svg id="zsvg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa de Japón que se acerca a la costa entre Tokio y Kioto y recorre las 55 láminas una por una"></svg>
+          <div class="zoom-cap" aria-live="polite"><b id="z-name">Japón</b><span id="z-km">El Tōkaidō, en el centro de la isla de Honshu</span></div>
+          <svg class="zoom-inset" id="zinset" viewBox="0 0 100 100" aria-hidden="true"></svg>
+        </div>
+        <figcaption class="zoom-bar">
+          <button type="button" class="btn" id="z-play">Ver el recorrido</button>
+          <span>Del mapa de Japón al camino, y después posta por posta hasta Kioto. La línea punteada marca los dos cruces en barco.</span>
+        </figcaption>
+      </figure>
+      <div class="notes">
+        <article class="note">
+          <p class="where">Hakone y Arai</p>
+          <h3>Controles</h3>
+          <p>Los puestos de control revisaban sobre todo dos cosas: las armas que entraban a Edo y las mujeres que salían, por si eran familiares de señores que debían quedarse en la capital.</p>
+        </article>
+        <article class="note">
+          <p class="where">Shimada y Kanaya</p>
+          <h3>Ríos sin puente</h3>
+          <p>Por razones defensivas, ríos como el Ōi no tenían puente. Se cruzaban a hombros de cargadores o en palanquín, y con las crecidas el paso se cerraba durante días.</p>
+        </article>
+        <article class="note">
+          <p class="where">Miya y Kuwana</p>
+          <h3>Siete ri por mar</h3>
+          <p>Entre Miya y Kuwana no había camino por tierra: se cruzaba la bahía de Ise en barco, unos 27 km. En el mapa del viaje es el tramo punteado más largo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="viaje" class="chapter">
+    <div class="band ai" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">El viaje</p>
+        <h2>Posta por posta, de Edo a Kioto</h2>
+      </div>
+      <div class="journey">
+        <div class="map-pane" aria-label="Mapa del recorrido">
+          <div class="map-now" aria-live="polite"><b id="now-name">Nihonbashi</b><span id="now-km">0 km de 492</span></div>
+          <svg id="map" viewBox="0 0 1000 360" role="img" aria-label="Recorrido del Tōkaidō entre Edo y Kioto con las 55 láminas"></svg>
+        </div>
+        <div class="legs" id="legs"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="grabado" class="chapter">
+    <div class="band" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">El oficio</p>
+        <h2>Una lámina, muchas planchas</h2>
+        <p class="ja-mark" lang="ja">木版画</p>
+      </div>
+      <div class="press">
+        <div>
+          <div class="press-stage" id="press-stage">
+            <img src="img/plancha1b.jpg" alt="Solo el papel" class="on">
+            <img src="img/plancha2b.jpg" alt="Plancha de contorno en negro">
+            <img src="img/plancha3b.jpg" alt="Con el degradado del cielo">
+            <img src="img/plancha4b.jpg" alt="Con el agua y las montañas">
+            <img src="img/plancha5b.jpg" alt="Con la tierra y los pinos">
+            <img src="img/plancha6b.jpg" alt="Lámina terminada con detalles y sellos">
+          </div>
+          <ol class="steps" id="steps">
+            <li><button type="button" aria-pressed="true" data-step="0"><small>1</small>Papel</button></li>
+            <li><button type="button" aria-pressed="false" data-step="1"><small>2</small>Contorno</button></li>
+            <li><button type="button" aria-pressed="false" data-step="2"><small>3</small>Cielo</button></li>
+            <li><button type="button" aria-pressed="false" data-step="3"><small>4</small>Agua y montes</button></li>
+            <li><button type="button" aria-pressed="false" data-step="4"><small>5</small>Tierra</button></li>
+            <li><button type="button" aria-pressed="false" data-step="5"><small>6</small>Detalles y sellos</button></li>
+          </ol>
+          <button type="button" class="btn press-run" id="press-run">Imprimir de a una plancha</button>
+        </div>
+        <div class="prose">
+          <p>Cada lámina era el trabajo de un taller. El editor financiaba y vendía. El pintor dibujaba con tinta sobre papel fino. El tallador pegaba ese dibujo sobre una plancha de madera de cerezo y tallaba las líneas: la plancha de contorno, que se imprime en negro. Con pruebas de esa plancha se tallaba una plancha distinta para cada color.</p>
+          <p>El impresor entintaba cada plancha con pigmentos al agua, apoyaba el papel encima y lo frotaba a mano con un <i>baren</i>, una almohadilla de bambú. Unas marcas en el borde de la plancha guardaban el registro, para que cada color cayera en su lugar.</p>
+          <p>Los degradados del cielo y del agua se llaman <i>bokashi</i>: el impresor humedecía la plancha y la entintaba de forma desigual en cada pasada. El azul intenso de muchas láminas es azul de Prusia, un pigmento llegado de Europa que se volvió accesible en Japón hacia 1830, justo antes de esta serie.</p>
+          <p class="quote-box">Acá la postal 56 está separada por color, como se separaba una lámina en planchas. Tocá cada paso para ver cómo se arma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hiroshige" class="chapter">
+    <div class="band ai" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">El pintor</p>
+        <h2>Utagawa Hiroshige, 1797-1858</h2>
+        <p class="ja-mark" lang="ja">歌川広重</p>
+      </div>
+      <div class="two">
+        <div class="prose">
+          <p>Hiroshige nació en Edo, hijo de un oficial del cuerpo de bomberos del shogunato, cargo que heredó de muy joven. Se formó con el maestro Utagawa Toyohiro y empezó con retratos de actores y de mujeres, pero encontró su voz en el paisaje: la lluvia, la nieve, la niebla y la luz de cada hora del día.</p>
+          <p>Según la tradición, en 1832 viajó por el Tōkaidō con la comitiva que llevaba caballos de regalo del shogún a la corte imperial de Kioto, y fue dibujando en el camino. Algunos historiadores dudan de ese viaje: varias composiciones siguen de cerca una guía ilustrada de 1797, el <i>Tōkaidō meisho zue</i>. La lámina de Fujikawa muestra justamente a esa comitiva con los caballos.</p>
+        </div>
+        <div class="prose">
+          <p>La serie salió entre 1833 y 1834, editada por Takenouchi Magohachi, del sello Hoeidō, al principio junto con Tsuruya Kiemon. Fue un éxito enorme: consagró a Hiroshige como el gran paisajista de su tiempo y lo llevó a volver al Tōkaidō muchas veces, con otras versiones de la serie.</p>
+          <p>Sus láminas cruzaron el mundo. Van Gogh copió al óleo dos grabados de Hiroshige en 1887, y Monet colgó grabados japoneses, entre ellos de Hiroshige, en su casa de Giverny. Las postales del cuadro reproducen la edición Hoeidō, la original.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="postal56" class="chapter">
+    <div class="band" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="chapter-head">
+        <p class="eyebrow">La última postal</p>
+        <h2>Fin del camino, vista del atardecer</h2>
+      </div>
+      <div class="two">
+        <figure class="hero-card"><img src="img/postal56b.jpg" width="1400" height="900" alt="Postal 56 completa"></figure>
+        <div class="prose">
+          <p>La postal 56 no es de Hiroshige. Se hizo en 2026 para completar el cuadro: ocupa el lugar libre que queda después de Kioto, y por eso muestra el final del viaje. La escena se generó con inteligencia artificial tomando como modelo láminas de la serie, y el texto en español se compuso aparte. Dos viajeros se detienen en una loma junto a un pino; uno señala el Fuji, del otro lado de la bahía, mientras otro caminante sigue por la playa.</p>
+          <p>Repite la estructura de las láminas de la serie: arriba, el título de la serie, el nombre de la vista y su subtítulo; al lado, un sello rojo con el kanji <span class="seal-inline" lang="ja">旅</span> (<i>tabi</i>, viaje); y abajo, donde las láminas llevan la firma y el sello del editor, el código que trae a esta página.</p>
+          <p>El subtítulo contesta a la primera lámina, Nihonbashi, que se llama <span lang="ja">朝之景</span> (<i>asa no kei</i>, vista de la mañana). El viaje empieza al amanecer en Edo y termina al atardecer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Láminas: Utagawa Hiroshige, <i>Las cincuenta y tres estaciones del Tōkaidō</i>, edición Hoeidō, 1833-1834. Imágenes de las láminas: escaneos de dominio público en Wikimedia Commons, de colecciones como el Museum of Fine Arts de Boston, el British Museum, el Metropolitan Museum of Art y la Biblioteca Metropolitana de Tokio. Mapas: Natural Earth. Distancias aproximadas, calculadas con las medidas tradicionales entre postas (1 ri ≈ 3,9 km).</p>
+    <p>Postal 56 y esta página: 2026.</p>
+  </div>
+</footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title" hidden>
+  <div class="sheet-bar">
+    <p class="eyebrow" id="sh-num"></p>
+    <button type="button" class="icon-btn" id="sh-close">Cerrar</button>
+  </div>
+  <img id="sh-img" src="img/h00.jpg" alt="">
+  <p class="credit" id="sh-cred"></p>
+  <h3 id="sh-title"></h3>
+  <p class="stop-title" id="sh-sub"></p>
+  <p class="stop-desc" id="sh-desc"></p>
+  <div class="sheet-meta">
+    <div>Desde Nihonbashi<b id="sh-km"></b></div>
+    <div>En el cuadro<b id="sh-pos"></b></div>
+  </div>
+  <div class="sheet-nav">
+    <button type="button" class="icon-btn" id="sh-prev">← Anterior</button>
+    <button type="button" class="icon-btn" id="sh-next">Siguiente →</button>
+  </div>
+</div>
+
+<script type="application/json" id="geo">{"nb":[[[118,46.627],[118.27,46.723],[118.72,46.676],[118.846,46.766],[119.062,46.661],[119.681,46.592],[119.908,46.718],[119.897,46.899],[119.771,46.994],[119.728,47.129],[119.282,47.414],[119.311,47.477],[119.134,47.527],[119.084,47.662],[118.767,47.757],[118.472,47.99],[118,48.001],[118,49.59],[118.645,49.954],[118.925,49.991],[127.49,50],[127.508,49.822],[127.853,49.586],[128.199,49.538],[128.671,49.611],[128.797,49.572],[128.761,49.471],[128.998,49.442],[129.117,49.349],[129.218,49.391],[129.34,49.341],[129.38,49.425],[129.481,49.422],[129.553,49.29],[129.711,49.275],[129.927,49.025],[130.201,48.883],[130.676,48.871],[130.528,48.616],[130.622,48.561],[130.626,48.483],[130.759,48.486],[130.744,48.412],[130.824,48.334],[130.676,48.064],[130.906,47.884],[130.942,47.718],[131.043,47.678],[131.418,47.743],[131.594,47.662],[132.526,47.708],[132.674,47.951],[132.807,47.936],[133.092,48.106],[133.524,48.095],[133.74,48.252],[134.388,48.382],[134.719,48.263],[134.56,48.01],[134.773,47.711],[134.557,47.472],[134.312,47.421],[134.182,47.328],[134.218,47.095],[134.114,47.056],[134.006,46.646],[133.848,46.48],[133.934,46.391],[133.862,46.338],[133.902,46.259],[133.689,46.143],[133.722,46.063],[133.657,45.935],[133.477,45.82],[133.477,45.628],[133.182,45.494],[133.102,45.287],[133.117,45.123],[132.922,45.028],[131.95,45.239],[131.853,45.337],[131.626,45.199],[131.608,45.089],[131.436,44.961],[130.935,44.842],[131.065,44.682],[131.263,44.054],[131.205,43.974],[131.162,43.532],[131.281,43.38],[131.169,43.201],[131.184,43.12],[131.079,43.032],[131.104,42.911],[130.406,42.735],[130.402,42.678],[130.572,42.622],[130.532,42.531],[130.503,42.61],[130.453,42.549],[130.262,42.708],[130.24,42.902],[130.1,42.921],[130.122,42.982],[129.88,42.997],[129.704,42.443],[129.592,42.448],[129.535,42.37],[129.34,42.445],[129.193,42.318],[129.211,42.22],[128.905,42.026],[128.033,41.994],[128.048,41.864],[128.303,41.583],[128.145,41.376],[128.015,41.413],[128.001,41.47],[127.637,41.43],[127.544,41.491],[127.133,41.523],[127.18,41.585],[126.928,41.801],[126.788,41.697],[126.68,41.735],[126.727,41.702],[126.568,41.614],[126.521,41.352],[126.442,41.349],[126.125,41.075],[126.007,40.9],[125.762,40.886],[125.643,40.81],[125.683,40.77],[125.571,40.785],[125.413,40.631],[125.294,40.648],[125.024,40.535],[125.042,40.461],[124.894,40.484],[124.358,40.089],[124.361,40.011],[124.203,39.878],[123.775,39.819],[123.641,39.878],[123.656,39.92],[123.591,39.785],[123.429,39.726],[123.418,39.824],[123.314,39.777],[123.253,39.817],[123.267,39.755],[123.206,39.734],[123.267,39.701],[123.008,39.68],[122.965,39.611],[122.849,39.618],[122.291,39.351],[122.043,39.059],[121.827,39.037],[121.895,38.981],[121.859,38.944],[121.726,39.03],[121.586,38.941],[121.697,38.863],[121.237,38.799],[121.179,38.721],[121.114,38.769],[121.118,38.944],[121.676,39.088],[121.589,39.263],[121.942,39.4],[121.525,39.365],[121.42,39.517],[121.222,39.528],[121.463,39.647],[121.532,39.623],[121.471,39.81],[121.874,39.991],[121.827,40.023],[121.996,40.125],[121.993,40.187],[122.093,40.228],[122.302,40.503],[122.151,40.604],[122.158,40.702],[121.852,40.832],[121.867,40.996],[121.741,40.849],[121.575,40.842],[121.363,40.94],[121.175,40.922],[121.049,40.797],[120.981,40.827],[120.938,40.741],[121.021,40.719],[120.826,40.673],[120.545,40.403],[120.592,40.368],[120.502,40.327],[120.473,40.214],[119.534,39.892],[119.53,39.816],[119.429,39.795],[119.21,39.569],[119.282,39.576],[119.278,39.383],[118.925,39.13],[118.969,39.194],[118.875,39.214],[118.796,39.152],[118.526,39.149],[118.328,39.03],[118,39.218],[118,38.197],[118.544,38.068],[118.76,38.156],[118.951,38.097],[118.997,37.963],[119.26,37.717],[119.217,37.674],[119.069,37.74],[118.969,37.593],[118.961,37.296],[119.145,37.18],[119.44,37.121],[119.771,37.153],[119.897,37.249],[119.858,37.36],[120.297,37.598],[120.308,37.666],[120.214,37.685],[120.74,37.833],[120.927,37.82],[121.031,37.71],[121.139,37.701],[121.172,37.576],[121.395,37.622],[121.431,37.597],[121.381,37.566],[121.571,37.428],[121.676,37.44],[121.586,37.453],[121.636,37.482],[121.989,37.426],[122.025,37.527],[122.122,37.563],[122.183,37.418],[122.245,37.46],[122.68,37.414],[122.576,37.35],[122.594,37.294],[122.551,37.32],[122.63,37.193],[122.471,37.11],[122.453,37.154],[122.403,37.021],[122.54,37.028],[122.518,36.903],[122.407,36.923],[122.432,36.864],[122.32,36.823],[122.187,36.85],[122.266,36.898],[122.162,36.947],[122.165,37.014],[122.032,36.898],[122.05,36.98],[121.928,36.994],[121.949,36.938],[121.636,36.832],[121.625,36.741],[121.571,36.764],[121.496,36.774],[121.607,36.845],[121.46,36.828],[121.402,36.712],[121.024,36.584],[120.851,36.651],[120.751,36.617],[120.751,36.541],[120.851,36.604],[120.963,36.548],[120.949,36.459],[120.866,36.378],[120.808,36.464],[120.715,36.428],[120.722,36.33],[120.643,36.322],[120.704,36.156],[120.628,36.116],[120.355,36.042],[120.293,36.062],[120.362,36.192],[120.308,36.275],[120.286,36.177],[120.092,36.224],[120.088,36.112],[120.175,35.994],[120.301,35.972],[120.095,35.901],[120.002,35.727],[119.908,35.744],[119.905,35.624],[119.84,35.658],[119.743,35.576],[119.732,35.621],[119.649,35.584],[119.552,35.38],[119.422,35.314],[119.357,35.098],[119.206,35.049],[119.188,34.733],[119.444,34.746],[119.642,34.537],[120.257,34.312],[120.401,33.87],[120.506,33.735],[120.484,33.651],[120.751,33.269],[120.729,33.205],[120.826,33.031],[120.891,33.026],[120.905,32.813],[120.83,32.698],[121.1,32.497],[121.355,32.414],[121.42,32.251],[121.363,32.232],[121.442,32.114],[121.823,31.952],[121.931,31.727],[121.676,31.724],[121.287,31.891],[121.114,31.796],[120.977,31.815],[120.812,32.023],[120.635,32.077],[120.491,32.082],[120.268,31.948],[120.131,31.943],[119.991,32.016],[119.843,32.3],[119.613,32.355],[119.685,32.293],[119.606,32.197],[119.779,32.205],[119.771,32.127],[120.005,31.95],[120.229,31.91],[120.47,32.024],[120.751,31.979],[120.826,31.829],[120.718,31.861],[120.733,31.813],[121.143,31.685],[121.319,31.504],[121.726,31.281],[121.978,30.915],[121.906,30.858],[121.543,30.817],[121.021,30.571],[120.812,30.297],[120.697,30.393],[120.481,30.403],[120.38,30.273],[120.257,30.299],[120.146,30.199],[120.275,30.278],[120.369,30.241],[120.452,30.37],[120.621,30.373],[120.733,30.233],[120.632,30.123],[120.794,30.066],[120.646,30.126],[120.751,30.226],[120.895,30.17],[121.186,30.338],[121.377,30.326],[121.723,29.961],[121.935,29.887],[122.129,29.904],[121.705,29.573],[121.485,29.544],[121.427,29.468],[121.442,29.416],[121.507,29.483],[121.485,29.39],[121.712,29.539],[121.777,29.47],[121.845,29.535],[121.748,29.562],[121.917,29.64],[121.971,29.439],[121.899,29.299],[121.993,29.257],[121.784,29.167],[121.841,29.319],[121.777,29.373],[121.723,29.183],[121.654,29.183],[121.64,29.306],[121.629,29.188],[121.575,29.306],[121.503,29.179],[121.409,29.161],[121.456,29.134],[121.402,29.107],[121.622,29.113],[121.532,29.02],[121.69,29.017],[121.683,28.914],[121.586,28.963],[121.492,28.928],[121.669,28.825],[121.604,28.725],[121.352,28.711],[121.143,28.847],[121.298,28.723],[121.258,28.674],[121.51,28.657],[121.582,28.505],[121.51,28.49],[121.607,28.477],[121.658,28.34],[121.607,28.271],[121.499,28.333],[121.409,28.304],[121.33,28.147],[121.226,28.239],[121.204,28.332],[121.265,28.365],[121.168,28.386],[121.129,28.306],[121.024,28.304],[121.125,28.235],[120.967,27.987],[120.607,28.043],[120.56,28.112],[120.589,28.026],[120.837,27.957],[120.869,27.882],[120.722,27.715],[120.635,27.764],[120.675,27.659],[120.596,27.57],[120.682,27.482],[120.635,27.379],[120.545,27.403],[120.506,27.345],[120.549,27.327],[120.517,27.202],[120.405,27.185],[120.293,27.249],[120.311,27.318],[120.196,27.298],[120.182,27.217],[120.347,27.242],[120.423,27.146],[120.376,27.099],[120.243,27.133],[120.254,26.998],[120.149,26.982],[120.236,26.967],[120.225,26.918],[120.031,26.9],[120.023,26.837],[120.128,26.797],[120.135,26.646],[119.847,26.523],[119.854,26.599],[119.984,26.653],[120.081,26.797],[119.926,26.792],[119.858,26.653],[119.829,26.716],[119.793,26.689],[119.847,26.852],[119.757,26.737],[119.685,26.812],[119.725,26.699],[119.577,26.788],[119.552,26.726],[119.609,26.683],[119.555,26.616],[119.599,26.57],[119.743,26.609],[119.818,26.445],[119.761,26.408],[119.653,26.498],[119.573,26.439],[119.649,26.437],[119.681,26.317],[119.825,26.427],[119.951,26.364],[119.653,26.273],[119.667,26.221],[119.458,25.983],[119.095,26.146],[119.329,25.944],[119.519,26.045],[119.696,26.003],[119.599,25.844],[119.566,25.871],[119.591,25.687],[119.447,25.687],[119.494,25.564],[119.581,25.584],[119.656,25.358],[119.581,25.344],[119.577,25.468],[119.545,25.376],[119.483,25.371],[119.509,25.474],[119.447,25.439],[119.447,25.505],[119.357,25.527],[119.383,25.591],[119.303,25.604],[119.239,25.481],[119.102,25.42],[119.174,25.326],[119.203,25.358],[119.195,25.263],[119.278,25.331],[119.343,25.243],[119.257,25.176],[119.116,25.214],[119.152,25.14],[119.098,25.111],[119.03,25.14],[119.069,25.216],[118.969,25.226],[119.026,25.279],[118.875,25.243],[118.976,25.182],[118.85,25.074],[118.954,25.003],[119.005,25.051],[119.019,24.961],[118.911,24.953],[118.951,24.87],[118.717,24.843],[118.666,24.953],[118.67,24.875],[118.573,24.885],[118.637,24.772],[118.702,24.811],[118.763,24.762],[118.641,24.679],[118.663,24.59],[118.591,24.529],[118.429,24.632],[118.432,24.699],[118.403,24.607],[118.241,24.544],[118.162,24.693],[118.112,24.585],[118.043,24.618],[118.015,24.326],[118.09,24.341],[118.126,24.262]],[[121.845,31.607],[121.985,31.504],[121.852,31.438],[121.287,31.704],[121.175,31.785],[121.265,31.84]],[[128.365,38.625],[128.642,38.129],[129.063,37.679],[129.43,37.073],[129.473,36.73],[129.387,36.324],[129.43,36.097],[129.38,36.042],[129.452,35.993],[129.556,36.082],[129.589,36.016],[129.445,35.636],[129.455,35.513],[129.412,35.472],[129.373,35.533],[129.362,35.354],[129.268,35.317],[129.193,35.155],[129.002,35.045],[128.959,35.136],[128.919,35.082],[128.699,35.096],[128.602,35.214],[128.653,35.062],[128.48,35.099],[128.372,35.013],[128.487,35.05],[128.491,34.996],[128.419,34.983],[128.473,34.89],[128.437,34.843],[128.339,34.873],[128.336,34.947],[128.206,34.89],[128.062,34.927],[128.069,35.082],[127.889,34.947],[127.72,34.99],[127.641,34.898],[127.591,34.946],[127.645,34.816],[127.774,34.849],[127.749,34.738],[127.623,34.697],[127.641,34.618],[127.562,34.662],[127.522,34.89],[127.364,34.824],[127.425,34.8],[127.357,34.76],[127.504,34.591],[127.349,34.586],[127.439,34.54],[127.342,34.446],[127.223,34.547],[127.126,34.54],[127.198,34.632],[127.195,34.574],[127.263,34.601],[127.274,34.706],[127.313,34.652],[127.357,34.697],[127.249,34.767],[127.011,34.613],[126.899,34.417],[126.809,34.451],[126.777,34.586],[126.727,34.432],[126.633,34.395],[126.604,34.301],[126.521,34.294],[126.467,34.473],[126.539,34.562],[126.392,34.534],[126.295,34.589],[126.287,34.743],[126.37,34.61],[126.464,34.584],[126.377,34.711],[126.622,34.63],[126.363,34.75],[126.665,34.809],[126.575,34.822],[126.568,34.902],[126.514,34.782],[126.385,34.787],[126.41,34.875],[126.435,34.981],[126.316,34.937],[126.367,35.039],[126.255,35.123],[126.341,35.157],[126.424,35.02],[126.453,35.101],[126.363,35.239],[126.309,35.233],[126.377,35.253],[126.41,35.369],[126.46,35.346],[126.417,35.395],[126.493,35.525],[126.694,35.535],[126.467,35.64],[126.662,35.793],[126.781,35.76],[126.705,35.849],[126.838,35.893],[126.611,35.89],[126.521,35.971],[126.871,36.062],[126.694,35.999],[126.59,36.131],[126.493,36.131],[126.604,36.172],[126.536,36.219],[126.583,36.295],[126.514,36.322],[126.583,36.352],[126.5,36.42],[126.619,36.474],[126.496,36.448],[126.478,36.747],[126.424,36.607],[126.341,36.741],[126.295,36.582],[126.273,36.72],[126.179,36.673],[126.212,36.727],[126.158,36.761],[126.133,36.703],[126.129,36.761],[126.233,36.805],[126.194,36.886],[126.277,36.874],[126.309,36.967],[126.28,36.812],[126.356,36.79],[126.327,36.847],[126.406,36.857],[126.421,36.923],[126.352,37.001],[126.446,37.004],[126.485,36.842],[126.518,36.948],[126.583,36.898],[126.5,37.055],[126.626,36.996],[126.629,36.911],[126.68,36.994],[126.795,36.955],[126.849,36.754],[126.903,36.822],[126.86,36.869],[127.043,36.994],[126.914,36.93],[126.824,37.002],[126.91,37.014],[126.892,37.095],[126.86,37.041],[126.755,37.05],[126.863,37.18],[126.687,37.131],[126.719,37.213],[126.658,37.254],[126.781,37.22],[126.871,37.267],[126.691,37.333],[126.716,37.384],[126.615,37.379],[126.593,37.472],[126.644,37.504],[126.536,37.769],[126.662,37.757],[126.662,37.673],[126.755,37.637],[126.68,37.686],[126.665,37.938],[127.09,38.286],[128.041,38.304],[128.224,38.4],[128.282,38.585]],[[126.946,33.478],[126.842,33.309],[126.269,33.198],[126.161,33.301],[126.309,33.465],[126.791,33.564]],[[128.365,38.625],[128.282,38.585],[128.249,38.426],[128.109,38.323],[127.223,38.313],[127.025,38.255],[126.665,37.938],[126.669,37.828],[126.593,37.774],[126.399,37.892],[126.158,37.83],[126.161,37.74],[126.111,37.74],[126.057,37.87],[125.96,37.912],[125.985,37.823],[125.92,37.845],[125.798,37.994],[125.596,38.032],[125.74,37.926],[125.632,37.926],[125.621,37.766],[125.528,37.796],[125.348,37.676],[125.362,37.761],[125.445,37.774],[125.391,37.796],[125.524,37.818],[125.51,37.894],[125.423,37.912],[125.384,37.892],[125.445,37.843],[125.348,37.865],[125.308,37.809],[125.24,37.823],[125.308,37.879],[125.261,37.933],[125.175,37.867],[124.981,37.926],[125.164,37.963],[125.107,38.034],[125.247,38.021],[125.265,38.078],[124.678,38.115],[124.855,38.227],[124.991,38.227],[124.873,38.257],[124.88,38.345],[125.017,38.498],[124.984,38.591],[125.128,38.579],[125.125,38.666],[125.463,38.708],[125.657,38.632],[125.449,38.777],[125.279,38.703],[125.24,38.794],[125.189,38.738],[125.135,38.804],[125.2,38.986],[125.333,39.083],[125.287,39.152],[125.413,39.214],[125.405,39.365],[125.459,39.385],[125.359,39.398],[125.344,39.459],[125.445,39.584],[125.287,39.522],[125.225,39.591],[125.117,39.566],[124.747,39.783],[124.743,39.645],[124.624,39.598],[124.646,39.697],[124.563,39.814],[124.419,39.824],[124.322,39.913],[124.405,40.028],[124.498,40.023],[124.369,40.098],[124.894,40.484],[125.042,40.461],[125.024,40.535],[125.294,40.648],[125.413,40.631],[125.571,40.785],[125.683,40.77],[125.643,40.81],[125.762,40.886],[125.949,40.883],[126.442,41.349],[126.521,41.352],[126.568,41.614],[126.727,41.702],[126.68,41.735],[126.788,41.697],[126.928,41.801],[127.18,41.585],[127.133,41.523],[127.544,41.491],[127.637,41.43],[128.001,41.47],[128.015,41.413],[128.145,41.376],[128.303,41.583],[128.048,41.864],[128.033,41.994],[128.941,42.036],[129.211,42.22],[129.193,42.318],[129.34,42.445],[129.535,42.37],[129.592,42.448],[129.704,42.443],[129.88,42.997],[130.122,42.982],[130.1,42.921],[130.24,42.902],[130.262,42.708],[130.453,42.549],[130.518,42.6],[130.701,42.294],[130.597,42.262],[130.51,42.337],[130.406,42.325],[130.402,42.242],[130.309,42.183],[130.294,42.237],[130.168,42.077],[130.075,42.078],[129.963,41.899],[129.898,41.904],[129.851,41.764],[129.689,41.649],[129.661,41.465],[129.805,41.376],[129.711,41.122],[129.765,40.945],[129.718,40.835],[129.571,40.84],[129.304,40.673],[129.232,40.705],[129.077,40.472],[128.638,40.314],[128.635,40.184],[128.365,40.098],[128.329,40.028],[128.264,40.077],[128.156,40.016],[128.008,40.045],[127.875,39.893],[127.623,39.831],[127.504,39.716],[127.576,39.594],[127.519,39.51],[127.562,39.316],[127.493,39.434],[127.378,39.378],[127.472,39.348],[127.393,39.341],[127.393,39.203],[127.76,39.116],[128.015,38.858],[128.21,38.728],[128.282,38.755]],[[140.545,50],[140.414,49.863],[140.536,49.778],[140.562,49.575],[140.436,49.295],[140.335,49.287],[140.389,49.275],[140.356,49.096],[140.295,49.087],[140.338,49.04],[140.22,49.013],[140.292,48.964],[140.4,48.993],[140.212,48.767],[140.176,48.461],[139.262,47.787],[138.97,47.318],[138.564,47.029],[138.348,46.664],[138.344,46.55],[138.204,46.455],[138.034,46.156],[137.145,45.374],[136.81,45.194],[136.443,44.785],[136.353,44.788],[136.166,44.496],[135.838,44.363],[135.655,44.169],[135.622,44.039],[135.511,43.922],[135.464,43.949],[135.518,43.88],[135.424,43.763],[135.277,43.689],[135.183,43.711],[135.223,43.645],[135.136,43.505],[134.193,43.08],[133.927,42.882],[133.84,42.897],[133.718,42.816],[133.592,42.853],[133.156,42.688],[133.023,42.7],[133.077,42.75],[132.991,42.826],[132.814,42.757],[132.764,42.907],[132.577,42.84],[132.404,42.943],[132.31,42.845],[132.292,43.086],[132.382,43.191],[132.307,43.238],[132.346,43.297],[132.289,43.313],[131.929,43.069],[131.886,43.086],[131.922,43.12],[131.85,43.1],[132.051,43.314],[131.968,43.27],[131.817,43.336],[131.724,43.21],[131.763,43.186],[131.648,43.169],[131.684,43.149],[131.565,42.997],[131.392,42.944],[131.4,42.874],[131.472,42.874],[131.274,42.777],[131.22,42.554],[131.119,42.668],[130.996,42.641],[130.888,42.6],[130.816,42.634],[130.95,42.652],[130.788,42.654],[130.827,42.7],[130.658,42.664],[130.874,42.527],[130.701,42.294],[130.532,42.531],[130.572,42.622],[130.381,42.696],[130.586,42.818],[130.993,42.848],[131.104,42.911],[131.079,43.032],[131.184,43.12],[131.169,43.201],[131.281,43.38],[131.162,43.532],[131.205,43.974],[131.263,44.054],[131.065,44.682],[130.935,44.842],[131.436,44.961],[131.608,45.089],[131.626,45.199],[131.853,45.337],[131.95,45.239],[132.922,45.028],[133.117,45.123],[133.102,45.287],[133.182,45.494],[133.477,45.628],[133.477,45.82],[133.657,45.935],[133.722,46.063],[133.689,46.143],[133.902,46.259],[133.862,46.338],[133.934,46.391],[133.848,46.48],[134.006,46.646],[134.114,47.056],[134.218,47.095],[134.182,47.328],[134.312,47.421],[134.557,47.472],[134.773,47.711],[134.56,48.01],[134.719,48.263],[134.388,48.382],[133.74,48.252],[133.524,48.095],[133.092,48.106],[132.807,47.936],[132.674,47.951],[132.526,47.708],[131.594,47.662],[131.418,47.743],[131.043,47.678],[130.942,47.718],[130.906,47.884],[130.676,48.064],[130.824,48.334],[130.744,48.412],[130.759,48.486],[130.626,48.483],[130.622,48.561],[130.528,48.616],[130.676,48.871],[130.201,48.883],[129.927,49.025],[129.711,49.275],[129.553,49.29],[129.481,49.422],[129.38,49.425],[129.34,49.341],[129.218,49.391],[129.117,49.349],[128.998,49.442],[128.761,49.471],[128.797,49.572],[128.671,49.611],[128.199,49.538],[127.853,49.586],[127.508,49.822],[127.49,50],[118.925,49.991],[118.645,49.954],[118,49.59]],[[144.008,50],[144.23,49.516],[144.284,49.25],[144.41,49.039],[144.691,48.865],[144.756,48.643],[144.676,48.657],[144.633,48.809],[144.504,48.949],[144.1,49.231],[143.276,49.402],[143.33,49.314],[143.668,49.315],[143.37,49.299],[143.038,49.157],[142.974,49.045],[142.988,48.917],[142.534,48.002],[142.545,47.767],[142.714,47.438],[142.88,47.389],[143.017,47.254],[143.096,46.875],[143.175,46.862],[143.085,46.813],[143.172,46.708],[143.341,46.683],[143.37,46.739],[143.193,46.779],[143.179,46.833],[143.395,46.794],[143.456,46.848],[143.578,46.418],[143.625,46.374],[143.431,46.024],[143.33,46.489],[143.395,46.533],[143.276,46.56],[143.29,46.517],[143.161,46.599],[142.797,46.595],[142.711,46.745],[142.459,46.631],[142.095,45.903],[141.933,46.036],[141.818,46.58],[142.056,47.054],[141.966,47.612],[142.192,47.966],[142.135,48.334],[141.858,48.773],[141.966,48.863],[142.077,49.199]],[[146.469,44.429],[146.574,44.451],[146.53,44.373],[146.116,44.255],[145.778,43.932],[145.587,43.848],[145.544,43.674],[145.515,43.736],[145.443,43.725],[145.411,43.836],[145.746,44.061],[146.12,44.506]],[[148.798,45.415],[148.816,45.334],[148.276,45.222],[147.913,44.962],[147.654,44.994],[147.556,44.824],[147.225,44.581],[147.056,44.537],[146.959,44.42],[146.858,44.462],[146.948,44.549],[146.937,44.625],[147.002,44.565],[146.998,44.663],[147.128,44.647],[147.196,44.714],[147.16,44.77],[147.11,44.827],[147.218,44.799],[147.466,44.967],[147.51,45.087],[147.621,45.065],[147.895,45.224],[147.862,45.354],[147.952,45.432],[148.003,45.281],[148.071,45.251],[148.312,45.275],[148.726,45.525],[148.852,45.481]],[[150.336,46.21],[150.57,46.232],[150.246,46.036],[150.199,45.93],[149.551,45.59],[149.436,45.587],[149.666,45.854],[149.81,45.879],[150.019,46.073]],[[154.836,49.65],[154.904,49.631],[154.796,49.457],[154.836,49.353],[154.742,49.287],[154.605,49.294],[154.609,49.375]],[[121.906,24.949],[121.805,24.779],[121.816,24.644],[121.881,24.598],[121.607,24.076],[121.399,23.146],[120.949,22.526],[120.862,22.009],[120.692,22],[120.621,22.295],[120.286,22.58],[120.167,23.031],[120.113,23.007],[120.059,23.077],[120.164,23.362],[120.124,23.521],[120.189,23.774],[121.031,25.029],[121.431,25.132],[121.435,25.241],[121.582,25.284],[121.705,25.157],[121.906,25.106],[121.921,25.022],[122.007,25.002]]],"jp":[[[129.783,31.8],[129.801,31.746],[129.776,31.729],[129.729,31.644],[129.697,31.621],[129.679,31.629],[129.661,31.641],[129.657,31.66],[129.675,31.666],[129.689,31.7],[129.718,31.731],[129.754,31.744],[129.769,31.759]],[[131.659,32.477],[131.655,32.457],[131.688,32.421],[131.634,32.396],[131.619,32.337],[131.601,32.323],[131.446,31.878],[131.457,31.822],[131.468,31.805],[131.497,31.796],[131.475,31.763],[131.45,31.651],[131.457,31.621],[131.41,31.585],[131.385,31.54],[131.392,31.491],[131.374,31.467],[131.36,31.41],[131.338,31.373],[131.317,31.374],[131.324,31.388],[131.266,31.381],[131.248,31.388],[131.245,31.422],[131.212,31.455],[131.18,31.452],[131.151,31.471],[131.072,31.45],[131.029,31.401],[131.014,31.363],[131.104,31.329],[131.104,31.31],[131.076,31.281],[131.094,31.276],[131.126,31.288],[131.133,31.28],[131.061,31.226],[131.007,31.221],[131.007,31.2],[130.968,31.141],[130.942,31.121],[130.791,31.077],[130.766,31.057],[130.726,31.047],[130.68,31.005],[130.658,31.003],[130.665,31.069],[130.744,31.121],[130.766,31.187],[130.755,31.204],[130.78,31.243],[130.798,31.325],[130.784,31.373],[130.748,31.435],[130.705,31.459],[130.694,31.486],[130.705,31.528],[130.694,31.547],[130.636,31.555],[130.59,31.585],[130.636,31.623],[130.687,31.619],[130.712,31.614],[130.723,31.597],[130.723,31.563],[130.759,31.563],[130.798,31.612],[130.809,31.651],[130.806,31.687],[130.777,31.71],[130.737,31.709],[130.687,31.726],[130.644,31.715],[130.615,31.682],[130.604,31.638],[130.568,31.601],[130.528,31.513],[130.518,31.472],[130.521,31.432],[130.564,31.334],[130.622,31.276],[130.662,31.271],[130.64,31.187],[130.586,31.155],[130.575,31.167],[130.536,31.162],[130.521,31.168],[130.496,31.227],[130.453,31.249],[130.298,31.254],[130.222,31.246],[130.194,31.315],[130.179,31.327],[130.208,31.325],[130.197,31.354],[130.118,31.408],[130.154,31.422],[130.183,31.417],[130.23,31.381],[130.244,31.405],[130.294,31.445],[130.334,31.562],[130.323,31.587],[130.338,31.607],[130.338,31.626],[130.327,31.643],[130.258,31.72],[130.183,31.759],[130.172,31.79],[130.19,31.835],[130.237,31.82],[130.197,31.859],[130.215,31.886],[130.219,31.93],[130.204,31.972],[130.176,31.999],[130.172,32.018],[130.204,32.048],[130.204,32.073],[130.179,32.094],[130.208,32.121],[130.248,32.134],[130.28,32.1],[130.32,32.119],[130.359,32.173],[130.359,32.19],[130.431,32.257],[130.46,32.3],[130.46,32.327],[130.471,32.347],[130.503,32.327],[130.514,32.339],[130.51,32.379],[130.539,32.416],[130.561,32.426],[130.572,32.452],[130.568,32.477],[130.55,32.492],[130.557,32.502],[130.6,32.506],[130.564,32.546],[130.658,32.624],[130.669,32.649],[130.46,32.615],[130.449,32.622],[130.474,32.648],[130.575,32.698],[130.626,32.703],[130.593,32.739],[130.593,32.756],[130.615,32.781],[130.593,32.816],[130.442,32.924],[130.42,33.088],[130.374,33.115],[130.366,33.141],[130.291,33.149],[130.24,33.188],[130.219,33.159],[130.15,33.112],[130.129,33.12],[130.161,33.054],[130.222,32.975],[130.219,32.955],[130.204,32.951],[130.204,32.93],[130.19,32.916],[130.107,32.875],[130.154,32.842],[130.194,32.845],[130.244,32.875],[130.309,32.875],[130.341,32.857],[130.374,32.793],[130.377,32.747],[130.356,32.717],[130.359,32.688],[130.341,32.668],[130.305,32.651],[130.269,32.651],[130.258,32.644],[130.255,32.626],[130.237,32.622],[130.233,32.61],[130.165,32.593],[130.168,32.619],[130.129,32.641],[130.129,32.685],[130.154,32.686],[130.19,32.713],[130.212,32.734],[130.208,32.752],[130.186,32.762],[130.19,32.784],[130.179,32.793],[130.093,32.794],[130.032,32.759],[129.992,32.747],[129.97,32.744],[129.959,32.764],[129.949,32.757],[129.956,32.745],[129.895,32.663],[129.841,32.639],[129.833,32.615],[129.783,32.573],[129.761,32.58],[129.74,32.568],[129.733,32.582],[129.783,32.607],[129.815,32.663],[129.819,32.678],[129.805,32.678],[129.797,32.691],[129.826,32.705],[129.833,32.695],[129.859,32.725],[129.823,32.722],[129.805,32.772],[129.783,32.784],[129.772,32.815],[129.754,32.818],[129.733,32.806],[129.722,32.826],[129.686,32.855],[129.661,32.914],[129.639,32.926],[129.632,32.978],[129.653,33.004],[129.664,33.07],[129.682,33.093],[129.722,33.08],[129.736,33.046],[129.754,33.054],[129.736,33.004],[129.74,32.99],[129.765,33.017],[129.797,33.011],[129.812,32.995],[129.823,32.98],[129.815,32.972],[129.815,32.923],[129.808,32.914],[129.794,32.948],[129.787,32.948],[129.79,32.913],[129.805,32.902],[129.808,32.886],[129.794,32.875],[129.844,32.838],[129.869,32.854],[129.884,32.875],[129.988,32.842],[130.003,32.845],[129.931,32.93],[129.931,32.958],[129.949,32.995],[129.945,33.016],[129.88,33.063],[129.823,33.043],[129.823,33.063],[129.797,33.078],[129.776,33.058],[129.747,33.066],[129.733,33.102],[129.751,33.098],[129.747,33.125],[129.761,33.13],[129.747,33.139],[129.729,33.122],[129.722,33.159],[129.711,33.163],[129.704,33.112],[129.682,33.115],[129.668,33.102],[129.661,33.127],[129.682,33.13],[129.686,33.142],[129.675,33.161],[129.653,33.171],[129.657,33.184],[129.646,33.198],[129.628,33.191],[129.599,33.208],[129.563,33.211],[129.553,33.225],[129.567,33.272],[129.592,33.284],[129.571,33.321],[129.581,33.37],[129.592,33.38],[129.621,33.36],[129.643,33.362],[129.671,33.399],[129.679,33.39],[129.675,33.362],[129.7,33.353],[129.743,33.365],[129.808,33.348],[129.819,33.304],[129.851,33.281],[129.841,33.316],[129.848,33.348],[129.869,33.379],[129.862,33.39],[129.869,33.397],[129.815,33.426],[129.787,33.455],[129.805,33.482],[129.819,33.485],[129.848,33.443],[129.873,33.443],[129.844,33.482],[129.837,33.514],[129.855,33.532],[129.851,33.553],[129.869,33.539],[129.887,33.536],[129.909,33.548],[129.941,33.532],[129.959,33.512],[129.941,33.48],[129.952,33.473],[129.963,33.483],[129.974,33.455],[130.017,33.446],[130.039,33.461],[130.057,33.495],[130.114,33.509],[130.168,33.534],[130.176,33.548],[130.122,33.542],[130.118,33.558],[130.096,33.561],[130.093,33.573],[130.111,33.59],[130.158,33.607],[130.161,33.63],[130.197,33.634],[130.208,33.666],[130.233,33.654],[130.237,33.644],[130.226,33.635],[130.233,33.618],[130.251,33.608],[130.273,33.612],[130.266,33.588],[130.291,33.575],[130.316,33.598],[130.392,33.605],[130.406,33.651],[130.399,33.669],[130.348,33.64],[130.294,33.664],[130.291,33.681],[130.294,33.689],[130.305,33.688],[130.312,33.672],[130.345,33.662],[130.388,33.678],[130.428,33.713],[130.446,33.718],[130.467,33.743],[130.471,33.764],[130.449,33.802],[130.478,33.824],[130.489,33.855],[130.507,33.85],[130.564,33.884],[130.633,33.882],[130.683,33.934],[130.73,33.933],[130.755,33.944],[130.827,33.939],[130.82,33.921],[130.863,33.926],[130.881,33.895],[130.914,33.892],[130.942,33.917],[130.95,33.938],[131.007,33.966],[131.018,33.956],[130.993,33.897],[131.004,33.887],[131.0,33.873],[130.986,33.873],[130.986,33.848],[130.964,33.833],[130.96,33.816],[131.007,33.813],[131.011,33.747],[131.065,33.654],[131.104,33.624],[131.256,33.605],[131.284,33.583],[131.367,33.575],[131.418,33.581],[131.475,33.632],[131.482,33.652],[131.522,33.676],[131.59,33.683],[131.626,33.667],[131.666,33.667],[131.731,33.58],[131.742,33.539],[131.731,33.512],[131.738,33.485],[131.706,33.409],[131.659,33.423],[131.641,33.416],[131.634,33.374],[131.601,33.365],[131.598,33.35],[131.558,33.347],[131.533,33.367],[131.508,33.363],[131.497,33.34],[131.511,33.274],[131.547,33.255],[131.612,33.254],[131.655,33.272],[131.698,33.254],[131.709,33.271],[131.821,33.244],[131.886,33.269],[131.904,33.266],[131.871,33.215],[131.871,33.2],[131.832,33.169],[131.81,33.127],[131.842,33.114],[131.868,33.129],[131.911,33.125],[131.868,33.095],[131.864,33.083],[131.882,33.075],[131.907,33.078],[131.929,33.068],[131.943,33.093],[131.958,33.068],[131.976,33.06],[131.986,33.063],[131.997,33.092],[132.015,33.065],[132.008,33.051],[131.929,33.048],[131.907,33.012],[131.904,32.984],[131.936,32.96],[131.95,32.96],[131.958,32.945],[132.012,32.945],[132.015,32.935],[132.033,32.951],[132.08,32.943],[132.084,32.933],[132.026,32.924],[131.983,32.889],[132.001,32.872],[131.954,32.828],[131.997,32.83],[132.004,32.825],[131.997,32.811],[131.929,32.778],[131.882,32.783],[131.857,32.686],[131.85,32.681],[131.821,32.703],[131.817,32.69],[131.767,32.644],[131.767,32.62],[131.745,32.588],[131.709,32.587],[131.684,32.523],[131.738,32.492],[131.695,32.469]],[[134.69,33.828],[134.74,33.84],[134.751,33.835],[134.65,33.786],[134.618,33.782],[134.607,33.765],[134.578,33.764],[134.571,33.737],[134.546,33.733],[134.539,33.716],[134.456,33.671],[134.406,33.654],[134.377,33.635],[134.388,33.624],[134.352,33.581],[134.312,33.573],[134.312,33.542],[134.272,33.509],[134.244,33.461],[134.197,33.311],[134.19,33.249],[134.175,33.237],[134.143,33.293],[134.107,33.294],[134.107,33.314],[134.038,33.384],[134.024,33.416],[133.97,33.436],[133.941,33.46],[133.927,33.493],[133.765,33.521],[133.74,33.537],[133.606,33.515],[133.466,33.455],[133.452,33.431],[133.455,33.414],[133.441,33.402],[133.365,33.387],[133.329,33.353],[133.322,33.352],[133.326,33.369],[133.311,33.375],[133.293,33.365],[133.254,33.326],[133.254,33.286],[133.272,33.259],[133.257,33.242],[133.254,33.218],[133.214,33.188],[133.225,33.159],[133.21,33.151],[133.203,33.163],[133.189,33.163],[133.164,33.137],[133.106,33.061],[133.099,33.024],[133.092,33.019],[133.052,33.039],[133.02,33.024],[133.002,32.987],[132.994,32.95],[133.009,32.904],[133.002,32.869],[132.962,32.864],[132.955,32.852],[132.955,32.815],[133.005,32.772],[133.027,32.74],[133.027,32.72],[133.002,32.712],[132.976,32.725],[132.958,32.759],[132.915,32.778],[132.894,32.774],[132.883,32.752],[132.872,32.769],[132.858,32.769],[132.811,32.74],[132.793,32.74],[132.757,32.752],[132.71,32.789],[132.663,32.779],[132.627,32.752],[132.624,32.799],[132.71,32.909],[132.627,32.906],[132.559,32.936],[132.573,32.923],[132.523,32.93],[132.519,32.909],[132.537,32.896],[132.505,32.892],[132.472,32.933],[132.494,32.95],[132.483,32.97],[132.501,32.994],[132.472,33.041],[132.418,33.051],[132.397,33.017],[132.382,33.019],[132.408,33.07],[132.451,33.053],[132.472,33.056],[132.483,33.068],[132.462,33.068],[132.469,33.095],[132.451,33.115],[132.472,33.114],[132.49,33.132],[132.44,33.142],[132.436,33.168],[132.458,33.174],[132.451,33.184],[132.422,33.2],[132.4,33.188],[132.393,33.203],[132.418,33.21],[132.458,33.205],[132.487,33.169],[132.505,33.181],[132.501,33.198],[132.516,33.213],[132.548,33.227],[132.523,33.25],[132.541,33.262],[132.508,33.257],[132.483,33.277],[132.483,33.291],[132.526,33.314],[132.418,33.304],[132.379,33.32],[132.386,33.331],[132.415,33.342],[132.422,33.375],[132.404,33.362],[132.39,33.375],[132.39,33.397],[132.408,33.416],[132.408,33.423],[132.393,33.423],[132.397,33.431],[132.422,33.445],[132.364,33.468],[132.321,33.458],[132.307,33.465],[132.253,33.441],[132.148,33.389],[132.13,33.363],[132.102,33.37],[132.109,33.387],[132.026,33.345],[132.012,33.348],[132.094,33.409],[132.166,33.421],[132.156,33.438],[132.17,33.446],[132.264,33.465],[132.411,33.536],[132.469,33.602],[132.501,33.625],[132.602,33.661],[132.678,33.716],[132.696,33.757],[132.688,33.814],[132.714,33.904],[132.757,33.911],[132.757,33.934],[132.771,33.956],[132.771,33.997],[132.861,34.056],[132.919,34.068],[132.93,34.095],[132.926,34.112],[132.897,34.113],[132.897,34.123],[132.93,34.12],[132.944,34.142],[133.03,34.052],[133.077,33.96],[133.128,33.933],[133.243,33.956],[133.25,33.975],[133.322,33.99],[133.416,33.987],[133.513,33.965],[133.563,33.993],[133.635,34.061],[133.642,34.079],[133.65,34.125],[133.642,34.184],[133.56,34.26],[133.61,34.238],[133.653,34.238],[133.671,34.223],[133.7,34.231],[133.783,34.289],[133.873,34.328],[133.898,34.365],[133.912,34.37],[133.948,34.377],[134.013,34.35],[134.082,34.348],[134.1,34.377],[134.118,34.36],[134.128,34.39],[134.143,34.392],[134.154,34.385],[134.168,34.324],[134.182,34.321],[134.218,34.355],[134.272,34.323],[134.258,34.294],[134.323,34.269],[134.344,34.25],[134.398,34.25],[134.442,34.208],[134.47,34.208],[134.496,34.225],[134.56,34.221],[134.593,34.231],[134.607,34.252],[134.611,34.24],[134.593,34.215],[134.611,34.216],[134.647,34.24],[134.625,34.201],[134.629,34.187],[134.607,34.184],[134.643,34.179],[134.604,34.112],[134.607,34.068],[134.593,34.039],[134.604,34.002],[134.625,33.998],[134.625,34.009],[134.636,34.01],[134.661,33.97],[134.697,33.951],[134.69,33.943],[134.704,33.938],[134.704,33.906],[134.661,33.875],[134.647,33.853],[134.719,33.848]],[[133.074,36.128],[133.088,36.128],[133.088,36.111],[133.059,36.102],[133.056,36.062],[133.027,36.057],[133.016,36.075],[133.009,36.082],[132.991,36.077],[133.005,36.048],[132.994,36.038],[132.98,36.04],[132.951,36.062],[132.969,36.082],[133.038,36.131]],[[133.423,34.446],[133.34,34.348],[133.282,34.321],[133.264,34.331],[133.304,34.35],[133.315,34.366],[133.304,34.378],[133.257,34.382],[133.275,34.402],[133.268,34.421],[133.246,34.427],[133.228,34.377],[133.182,34.341],[133.203,34.328],[133.21,34.307],[133.203,34.289],[133.185,34.28],[133.16,34.294],[133.102,34.257],[133.077,34.26],[133.07,34.277],[133.074,34.318],[133.113,34.351],[133.113,34.314],[133.135,34.318],[133.149,34.351],[133.167,34.355],[133.167,34.363],[133.135,34.382],[133.092,34.39],[133.081,34.382],[133.084,34.351],[133.059,34.333],[132.912,34.314],[132.854,34.287],[132.836,34.311],[132.764,34.27],[132.778,34.243],[132.771,34.235],[132.703,34.226],[132.656,34.199],[132.627,34.198],[132.613,34.218],[132.566,34.193],[132.544,34.204],[132.559,34.218],[132.505,34.287],[132.505,34.328],[132.53,34.334],[132.519,34.353],[132.498,34.363],[132.44,34.35],[132.404,34.368],[132.346,34.35],[132.224,34.238],[132.242,34.167],[132.238,34.142],[132.202,34.108],[132.199,34.064],[132.213,33.99],[132.181,33.958],[132.134,33.938],[132.138,33.895],[132.163,33.841],[132.076,33.787],[132.04,33.775],[132.044,33.794],[132.069,33.811],[132.08,33.835],[132.087,33.824],[132.109,33.83],[132.109,33.863],[132.058,33.895],[131.972,33.917],[131.943,33.951],[131.853,33.998],[131.835,33.995],[131.814,33.971],[131.828,33.971],[131.828,33.965],[131.781,33.97],[131.778,33.987],[131.824,34.027],[131.742,34.056],[131.634,34.027],[131.605,34.027],[131.594,34.037],[131.587,34.027],[131.594,33.992],[131.572,33.985],[131.562,34.005],[131.518,34.009],[131.482,34.032],[131.468,34.027],[131.475,34.014],[131.443,33.978],[131.421,34.0],[131.41,33.983],[131.392,33.987],[131.403,34.017],[131.389,34.039],[131.32,33.953],[131.259,33.924],[131.248,33.938],[131.227,33.934],[131.22,33.951],[131.187,33.933],[131.173,33.934],[131.162,33.953],[131.166,33.976],[131.122,34.0],[131.104,34.03],[131.036,34.047],[131.014,34.015],[130.932,33.946],[130.928,33.922],[130.917,33.914],[130.899,33.924],[130.881,33.938],[130.881,33.951],[130.899,33.949],[130.91,33.973],[130.917,34.01],[130.906,34.029],[130.914,34.054],[130.903,34.066],[130.878,34.068],[130.863,34.113],[130.91,34.154],[130.924,34.184],[130.896,34.257],[130.87,34.279],[130.899,34.355],[130.942,34.351],[130.953,34.361],[131.032,34.382],[131.018,34.393],[130.957,34.404],[130.946,34.392],[130.935,34.395],[130.95,34.419],[130.975,34.439],[131.004,34.426],[131.0,34.415],[131.022,34.409],[131.076,34.426],[131.133,34.412],[131.14,34.378],[131.173,34.368],[131.191,34.393],[131.169,34.417],[131.173,34.429],[131.252,34.437],[131.281,34.409],[131.23,34.417],[131.209,34.37],[131.324,34.393],[131.335,34.415],[131.414,34.424],[131.414,34.454],[131.457,34.49],[131.454,34.518],[131.522,34.552],[131.551,34.581],[131.565,34.62],[131.598,34.616],[131.598,34.66],[131.616,34.665],[131.655,34.654],[131.68,34.675],[131.713,34.672],[131.792,34.686],[131.857,34.714],[131.875,34.76],[131.896,34.763],[131.997,34.838],[132.033,34.876],[132.055,34.873],[132.062,34.907],[132.13,34.959],[132.217,35.013],[132.235,35.035],[132.271,35.04],[132.318,35.062],[132.328,35.093],[132.39,35.135],[132.386,35.145],[132.408,35.175],[132.53,35.245],[132.534,35.258],[132.638,35.295],[132.663,35.329],[132.674,35.385],[132.67,35.4],[132.624,35.43],[132.634,35.44],[132.75,35.452],[132.746,35.464],[132.724,35.471],[132.836,35.506],[132.969,35.516],[132.973,35.542],[133.034,35.547],[133.052,35.574],[133.081,35.576],[133.092,35.601],[133.156,35.562],[133.225,35.582],[133.232,35.579],[133.225,35.569],[133.239,35.564],[133.308,35.577],[133.326,35.569],[133.272,35.55],[133.254,35.533],[133.264,35.496],[133.329,35.466],[133.401,35.454],[133.419,35.457],[133.441,35.491],[133.581,35.533],[133.732,35.503],[133.912,35.515],[134.01,35.537],[134.035,35.52],[134.236,35.547],[134.283,35.565],[134.294,35.586],[134.362,35.596],[134.377,35.611],[134.467,35.638],[134.539,35.672],[134.589,35.66],[134.798,35.665],[134.834,35.657],[134.841,35.645],[134.863,35.658],[134.928,35.641],[134.964,35.662],[134.96,35.673],[134.989,35.69],[135.028,35.694],[135.086,35.726],[135.082,35.739],[135.226,35.773],[135.277,35.731],[135.306,35.689],[135.306,35.672],[135.298,35.658],[135.28,35.668],[135.259,35.657],[135.241,35.623],[135.187,35.565],[135.187,35.545],[135.208,35.542],[135.208,35.559],[135.248,35.592],[135.255,35.57],[135.27,35.564],[135.241,35.559],[135.237,35.542],[135.302,35.513],[135.324,35.525],[135.334,35.508],[135.313,35.459],[135.32,35.447],[135.352,35.488],[135.396,35.476],[135.403,35.483],[135.403,35.506],[135.374,35.501],[135.349,35.51],[135.338,35.537],[135.36,35.554],[135.417,35.562],[135.439,35.591],[135.464,35.603],[135.453,35.572],[135.482,35.559],[135.478,35.523],[135.496,35.523],[135.511,35.548],[135.511,35.498],[135.568,35.493],[135.648,35.543],[135.669,35.535],[135.64,35.521],[135.633,35.493],[135.622,35.486],[135.644,35.481],[135.723,35.491],[135.748,35.513],[135.748,35.533],[135.72,35.521],[135.709,35.54],[135.691,35.545],[135.705,35.562],[135.738,35.57],[135.756,35.548],[135.777,35.55],[135.795,35.532],[135.81,35.527],[135.835,35.535],[135.802,35.569],[135.856,35.579],[135.813,35.643],[135.824,35.645],[135.867,35.618],[135.903,35.624],[135.921,35.608],[135.95,35.63],[135.982,35.631],[135.982,35.643],[135.964,35.655],[135.975,35.69],[135.972,35.702],[135.957,35.7],[135.957,35.729],[136.018,35.765],[136.047,35.704],[136.026,35.68],[136.047,35.658],[136.069,35.662],[136.094,35.716],[136.101,35.776],[136.069,35.825],[135.993,35.885],[135.993,35.935],[135.957,35.972],[135.964,35.999],[136.0,36.025],[136.044,36.111],[136.119,36.2],[136.134,36.224],[136.123,36.253],[136.162,36.253],[136.198,36.264],[136.299,36.347],[136.382,36.391],[136.641,36.663],[136.688,36.73],[136.767,36.889],[136.767,36.913],[136.749,36.926],[136.767,36.98],[136.72,37.055],[136.728,37.127],[136.71,37.149],[136.699,37.148],[136.695,37.136],[136.677,37.137],[136.67,37.149],[136.681,37.198],[136.706,37.229],[136.699,37.239],[136.735,37.284],[136.72,37.325],[136.749,37.359],[136.843,37.399],[136.882,37.408],[136.936,37.399],[137.073,37.453],[137.113,37.487],[137.296,37.531],[137.34,37.517],[137.35,37.506],[137.343,37.487],[137.358,37.453],[137.325,37.44],[137.286,37.443],[137.253,37.43],[137.246,37.414],[137.239,37.381],[137.25,37.357],[137.268,37.355],[137.257,37.315],[137.232,37.293],[137.167,37.301],[137.109,37.283],[137.07,37.239],[137.07,37.218],[137.034,37.205],[137.016,37.185],[136.947,37.217],[136.962,37.235],[136.929,37.222],[136.879,37.144],[136.897,37.139],[136.893,37.117],[136.868,37.11],[136.861,37.077],[136.875,37.07],[136.933,37.08],[136.962,37.051],[136.98,37.046],[137.005,37.055],[137.023,37.095],[137.048,37.099],[137.055,37.08],[137.048,37.023],[137.055,36.967],[137.026,36.938],[137.026,36.915],[136.987,36.871],[137.005,36.835],[137.08,36.79],[137.156,36.761],[137.3,36.758],[137.332,36.763],[137.383,36.8],[137.408,36.845],[137.426,36.921],[137.448,36.933],[137.498,36.955],[137.682,36.987],[137.898,37.058],[138.052,37.131],[138.099,37.171],[138.164,37.161],[138.243,37.183],[138.326,37.23],[138.438,37.321],[138.549,37.377],[138.578,37.403],[138.621,37.477],[138.661,37.524],[138.718,37.565],[138.747,37.597],[138.808,37.761],[138.826,37.798],[138.859,37.828],[139.068,37.955],[139.132,37.958],[139.24,38.004],[139.305,38.043],[139.41,38.132],[139.431,38.169],[139.464,38.375],[139.492,38.455],[139.6,38.649],[139.626,38.681],[139.716,38.745],[139.773,38.818],[139.892,39.133],[139.903,39.225],[139.917,39.262],[139.932,39.287],[139.964,39.299],[139.996,39.328],[140.022,39.407],[140.047,39.505],[140.058,39.728],[140.029,39.824],[139.968,39.88],[139.921,39.898],[139.878,39.893],[139.845,39.861],[139.759,39.858],[139.708,39.924],[139.705,39.946],[139.719,39.952],[139.701,39.961],[139.701,40.006],[139.744,39.983],[139.824,39.961],[139.867,39.984],[139.903,40.018],[139.978,40.126],[139.993,40.17],[139.989,40.19],[140.011,40.236],[140.025,40.354],[139.946,40.418],[139.942,40.545],[139.928,40.57],[139.914,40.586],[139.856,40.591],[139.86,40.609],[139.899,40.643],[139.924,40.646],[139.939,40.67],[139.96,40.678],[139.996,40.743],[140.047,40.768],[140.122,40.744],[140.198,40.786],[140.22,40.778],[140.259,40.795],[140.295,40.874],[140.317,40.954],[140.32,41.028],[140.371,40.986],[140.382,40.989],[140.371,41.021],[140.385,41.03],[140.407,41.026],[140.4,41.04],[140.349,41.038],[140.342,41.05],[140.328,41.041],[140.32,41.084],[140.299,41.111],[140.248,41.124],[140.245,41.134],[140.302,41.136],[140.32,41.149],[140.342,41.266],[140.392,41.241],[140.461,41.183],[140.482,41.183],[140.511,41.198],[140.526,41.22],[140.547,41.225],[140.594,41.22],[140.634,41.195],[140.644,41.171],[140.63,41.094],[140.655,41.008],[140.673,40.896],[140.702,40.854],[140.752,40.835],[140.799,40.839],[140.853,40.884],[140.871,40.915],[140.864,40.922],[140.871,40.945],[140.839,40.954],[140.86,40.957],[140.86,40.972],[140.889,41.011],[140.914,40.996],[140.95,40.991],[140.965,40.969],[140.983,40.96],[140.979,40.935],[141.058,40.916],[141.084,40.886],[141.127,40.873],[141.148,40.879],[141.184,40.911],[141.228,40.987],[141.246,41.107],[141.278,41.155],[141.256,41.212],[141.206,41.264],[141.184,41.278],[141.163,41.278],[141.138,41.247],[141.145,41.242],[141.159,41.256],[141.148,41.236],[141.058,41.183],[140.979,41.197],[140.947,41.173],[140.864,41.165],[140.814,41.129],[140.767,41.144],[140.767,41.197],[140.778,41.207],[140.803,41.33],[140.824,41.364],[140.835,41.418],[140.9,41.48],[140.907,41.538],[140.914,41.546],[140.994,41.491],[141.066,41.48],[141.109,41.464],[141.195,41.388],[141.274,41.354],[141.318,41.354],[141.382,41.372],[141.462,41.43],[141.465,41.404],[141.454,41.396],[141.462,41.388],[141.422,41.313],[141.39,41.161],[141.397,41.128],[141.386,41.03],[141.39,40.933],[141.404,40.817],[141.436,40.67],[141.49,40.562],[141.534,40.531],[141.577,40.542],[141.588,40.521],[141.692,40.442],[141.721,40.413],[141.724,40.393],[141.742,40.385],[141.778,40.315],[141.829,40.251],[141.843,40.226],[141.811,40.192],[141.825,40.175],[141.865,40.16],[141.876,40.14],[141.836,40.094],[141.843,40.07],[141.919,40.008],[141.951,39.996],[141.962,39.954],[141.944,39.925],[141.973,39.883],[142.005,39.773],[142.009,39.753],[141.984,39.707],[141.98,39.648],[141.966,39.626],[141.966,39.598],[142.012,39.637],[142.038,39.638],[142.03,39.63],[142.038,39.611],[142.027,39.594],[142.03,39.584],[142.07,39.55],[142.07,39.54],[142.016,39.488],[141.951,39.461],[141.969,39.444],[141.998,39.446],[142.038,39.485],[142.059,39.466],[142.045,39.461],[142.03,39.417],[141.98,39.412],[141.94,39.385],[141.966,39.375],[141.904,39.331],[141.926,39.324],[141.98,39.351],[141.984,39.328],[141.915,39.295],[141.933,39.275],[141.901,39.275],[141.901,39.248],[141.948,39.25],[141.948,39.228],[141.93,39.213],[141.879,39.208],[141.894,39.187],[141.926,39.187],[141.915,39.17],[141.894,39.159],[141.843,39.152],[141.908,39.11],[141.912,39.098],[141.89,39.089],[141.836,39.105],[141.818,39.091],[141.872,39.062],[141.822,39.057],[141.854,39.025],[141.847,39.022],[141.746,39.027],[141.728,39.037],[141.728,39.022],[141.75,38.988],[141.728,38.988],[141.714,38.975],[141.735,38.961],[141.732,38.951],[141.703,38.951],[141.681,38.971],[141.674,38.981],[141.692,38.995],[141.652,38.997],[141.638,38.985],[141.645,38.922],[141.674,38.851],[141.652,38.865],[141.638,38.892],[141.588,38.882],[141.588,38.819],[141.523,38.769],[141.573,38.718],[141.566,38.703],[141.544,38.708],[141.526,38.689],[141.462,38.661],[141.487,38.64],[141.534,38.639],[141.519,38.603],[141.469,38.569],[141.516,38.536],[141.53,38.549],[141.548,38.519],[141.544,38.482],[141.53,38.483],[141.516,38.509],[141.494,38.461],[141.508,38.446],[141.469,38.429],[141.487,38.392],[141.519,38.402],[141.537,38.399],[141.548,38.385],[141.519,38.39],[141.501,38.372],[141.526,38.36],[141.53,38.318],[141.544,38.303],[141.526,38.267],[141.49,38.292],[141.462,38.299],[141.469,38.323],[141.426,38.343],[141.44,38.372],[141.429,38.38],[141.397,38.377],[141.354,38.402],[141.303,38.407],[141.231,38.394],[141.181,38.372],[141.17,38.323],[141.152,38.323],[141.13,38.372],[141.116,38.365],[141.098,38.372],[141.08,38.362],[141.048,38.309],[141.08,38.311],[141.08,38.294],[141.051,38.279],[141.019,38.245],[140.968,38.171],[140.925,38.049],[140.918,37.965],[140.932,37.889],[140.994,37.799],[141.022,37.727],[141.008,37.679],[141.03,37.647],[141.04,37.377],[141.008,37.227],[141.008,37.134],[140.986,37.09],[140.976,37.002],[140.961,36.967],[140.925,36.938],[140.835,36.908],[140.803,36.886],[140.803,36.857],[140.742,36.768],[140.695,36.617],[140.637,36.54],[140.623,36.506],[140.608,36.433],[140.626,36.364],[140.616,36.337],[140.565,36.283],[140.58,36.161],[140.644,36.013],[140.788,35.809],[140.842,35.743],[140.878,35.721],[140.86,35.687],[140.828,35.714],[140.72,35.682],[140.716,35.699],[140.662,35.689],[140.482,35.565],[140.425,35.491],[140.385,35.381],[140.414,35.302],[140.392,35.197],[140.378,35.177],[140.349,35.18],[140.331,35.158],[140.335,35.142],[140.32,35.13],[140.302,35.133],[140.295,35.147],[140.277,35.131],[140.252,35.135],[140.238,35.113],[140.133,35.123],[140.104,35.098],[140.101,35.076],[139.989,35.02],[139.964,34.976],[139.96,34.941],[139.928,34.907],[139.842,34.9],[139.824,34.912],[139.824,34.936],[139.755,34.956],[139.752,34.976],[139.795,34.973],[139.827,34.99],[139.86,34.986],[139.87,35.0],[139.856,35.022],[139.834,35.027],[139.849,35.069],[139.834,35.099],[139.838,35.135],[139.82,35.158],[139.824,35.199],[139.867,35.224],[139.867,35.246],[139.849,35.272],[139.849,35.294],[139.78,35.319],[139.802,35.317],[139.824,35.329],[139.824,35.348],[139.845,35.376],[139.892,35.364],[139.906,35.378],[139.899,35.424],[140.007,35.474],[140.072,35.543],[140.09,35.54],[140.101,35.567],[140.086,35.567],[140.079,35.604],[140.007,35.66],[139.95,35.672],[139.921,35.662],[139.939,35.636],[139.896,35.614],[139.849,35.638],[139.838,35.614],[139.824,35.623],[139.82,35.638],[139.806,35.638],[139.788,35.603],[139.773,35.618],[139.777,35.641],[139.766,35.653],[139.759,35.631],[139.798,35.54],[139.788,35.511],[139.716,35.464],[139.665,35.467],[139.644,35.454],[139.687,35.432],[139.687,35.4],[139.651,35.41],[139.636,35.402],[139.658,35.376],[139.647,35.299],[139.658,35.287],[139.665,35.299],[139.676,35.292],[139.694,35.268],[139.734,35.265],[139.744,35.25],[139.726,35.233],[139.734,35.223],[139.726,35.207],[139.69,35.209],[139.665,35.194],[139.669,35.16],[139.687,35.14],[139.615,35.135],[139.615,35.174],[139.6,35.202],[139.626,35.212],[139.604,35.224],[139.561,35.287],[139.55,35.288],[139.543,35.309],[139.485,35.3],[139.467,35.314],[139.413,35.319],[139.284,35.297],[139.183,35.263],[139.147,35.234],[139.143,35.184],[139.158,35.136],[139.122,35.15],[139.089,35.109],[139.075,35.054],[139.107,35.049],[139.086,34.998],[139.1,34.974],[139.132,34.966],[139.143,34.942],[139.14,34.871],[139.1,34.856],[139.053,34.778],[138.999,34.733],[139.003,34.721],[138.985,34.684],[138.992,34.65],[138.974,34.645],[138.942,34.66],[138.834,34.596],[138.772,34.647],[138.78,34.664],[138.747,34.691],[138.744,34.73],[138.776,34.751],[138.747,34.814],[138.762,34.846],[138.754,34.88],[138.776,34.905],[138.79,34.907],[138.772,34.932],[138.762,34.979],[138.787,35.027],[138.855,35.018],[138.895,35.02],[138.909,35.03],[138.805,35.121],[138.697,35.138],[138.636,35.116],[138.585,35.115],[138.553,35.096],[138.528,35.05],[138.499,35.032],[138.495,35.001],[138.506,34.991],[138.506,35.012],[138.531,35.017],[138.513,34.979],[138.366,34.917],[138.33,34.854],[138.34,34.826],[138.294,34.765],[138.214,34.713],[138.193,34.642],[138.2,34.621],[138.225,34.616],[138.24,34.603],[138.232,34.594],[138.189,34.601],[138.049,34.655],[137.966,34.667],[137.894,34.667],[137.793,34.64],[137.685,34.67],[137.548,34.677],[137.426,34.667],[137.142,34.589],[137.095,34.593],[137.016,34.579],[137.052,34.647],[137.073,34.665],[137.109,34.625],[137.12,34.638],[137.26,34.704],[137.282,34.731],[137.3,34.728],[137.296,34.691],[137.304,34.689],[137.311,34.726],[137.34,34.726],[137.311,34.736],[137.325,34.767],[137.278,34.809],[137.268,34.804],[137.224,34.816],[137.206,34.802],[137.196,34.807],[137.188,34.77],[137.17,34.763],[137.17,34.784],[137.142,34.789],[137.088,34.777],[137.073,34.785],[137.052,34.777],[137.019,34.784],[136.958,34.833],[136.983,34.898],[136.98,34.924],[136.933,34.846],[136.915,34.775],[136.936,34.746],[136.962,34.735],[136.972,34.696],[136.915,34.711],[136.857,34.74],[136.843,34.768],[136.864,34.836],[136.843,34.871],[136.828,34.871],[136.821,34.939],[136.832,34.973],[136.879,35.044],[136.886,35.089],[136.872,35.093],[136.85,35.04],[136.843,35.076],[136.828,35.079],[136.839,35.032],[136.814,35.027],[136.81,35.049],[136.8,35.049],[136.8,35.023],[136.724,35.027],[136.659,34.985],[136.641,34.947],[136.663,34.941],[136.645,34.93],[136.648,34.912],[136.638,34.888],[136.616,34.853],[136.533,34.765],[136.519,34.681],[136.548,34.652],[136.54,34.616],[136.551,34.601],[136.634,34.591],[136.677,34.554],[136.753,34.513],[136.814,34.486],[136.854,34.486],[136.882,34.437],[136.915,34.434],[136.926,34.424],[136.918,34.377],[136.893,34.382],[136.875,34.37],[136.886,34.356],[136.911,34.355],[136.882,34.328],[136.897,34.301],[136.897,34.267],[136.836,34.247],[136.796,34.253],[136.774,34.262],[136.774,34.274],[136.81,34.274],[136.843,34.26],[136.836,34.28],[136.85,34.274],[136.857,34.294],[136.846,34.307],[136.807,34.307],[136.807,34.287],[136.774,34.307],[136.728,34.29],[136.702,34.296],[136.724,34.331],[136.706,34.334],[136.648,34.314],[136.666,34.309],[136.666,34.297],[136.609,34.265],[136.591,34.263],[136.573,34.28],[136.562,34.26],[136.522,34.274],[136.504,34.247],[136.515,34.23],[136.472,34.238],[136.418,34.204],[136.386,34.204],[136.335,34.184],[136.299,34.154],[136.296,34.125],[136.321,34.108],[136.31,34.09],[136.285,34.081],[136.252,34.108],[136.22,34.074],[136.22,34.068],[136.245,34.064],[136.252,34.044],[136.281,34.017],[136.274,33.971],[136.249,33.971],[136.231,33.993],[136.206,33.971],[136.206,33.965],[136.227,33.961],[136.234,33.948],[136.227,33.938],[136.213,33.944],[136.198,33.921],[136.159,33.914],[136.137,33.89],[136.105,33.892],[136.069,33.846],[135.982,33.652],[135.961,33.642],[135.957,33.625],[135.936,33.617],[135.939,33.603],[135.961,33.593],[135.885,33.529],[135.81,33.505],[135.784,33.473],[135.788,33.441],[135.774,33.445],[135.759,33.433],[135.756,33.451],[135.77,33.468],[135.766,33.482],[135.637,33.495],[135.446,33.551],[135.388,33.595],[135.392,33.618],[135.381,33.637],[135.327,33.671],[135.342,33.694],[135.403,33.701],[135.392,33.713],[135.313,33.765],[135.234,33.782],[135.23,33.799],[135.172,33.838],[135.154,33.875],[135.118,33.894],[135.057,33.88],[135.068,33.897],[135.057,33.902],[135.079,33.906],[135.068,33.931],[135.1,33.954],[135.079,33.96],[135.075,33.978],[135.154,34.01],[135.162,34.025],[135.154,34.049],[135.093,34.068],[135.115,34.101],[135.129,34.108],[135.122,34.137],[135.187,34.135],[135.19,34.15],[135.165,34.187],[135.147,34.186],[135.136,34.228],[135.093,34.26],[135.061,34.267],[135.104,34.318],[135.208,34.343],[135.32,34.429],[135.374,34.485],[135.374,34.518],[135.41,34.54],[135.414,34.557],[135.417,34.61],[135.403,34.659],[135.414,34.692],[135.381,34.681],[135.342,34.709],[135.288,34.706],[135.288,34.681],[135.255,34.677],[135.255,34.701],[135.219,34.691],[135.241,34.65],[135.212,34.655],[135.205,34.677],[135.187,34.675],[135.183,34.652],[135.046,34.625],[135.018,34.642],[134.96,34.643],[134.938,34.667],[134.744,34.767],[134.697,34.777],[134.568,34.767],[134.55,34.773],[134.521,34.76],[134.496,34.765],[134.492,34.787],[134.424,34.726],[134.37,34.736],[134.352,34.716],[134.355,34.706],[134.208,34.728],[134.226,34.708],[134.28,34.697],[134.244,34.691],[134.222,34.664],[134.154,34.637],[134.19,34.637],[134.179,34.615],[134.114,34.586],[134.085,34.581],[134.028,34.61],[133.981,34.606],[133.938,34.588],[133.927,34.578],[133.93,34.561],[133.941,34.556],[134.002,34.594],[134.035,34.593],[134.046,34.581],[134.046,34.564],[134.006,34.534],[134.013,34.52],[133.984,34.529],[133.938,34.451],[133.822,34.463],[133.826,34.437],[133.794,34.442],[133.768,34.488],[133.743,34.507],[133.729,34.507],[133.725,34.527],[133.686,34.52],[133.596,34.483],[133.57,34.459],[133.47,34.424],[133.524,34.483],[133.502,34.491],[133.47,34.476],[133.43,34.473],[133.419,34.468],[133.416,34.451]],[[145.767,43.387],[145.814,43.378],[145.825,43.373],[145.818,43.365],[145.778,43.356],[145.76,43.336],[145.699,43.323],[145.674,43.307],[145.645,43.313],[145.62,43.304],[145.566,43.247],[145.551,43.21],[145.519,43.176],[145.53,43.169],[145.497,43.167],[145.454,43.184],[145.303,43.174],[145.231,43.14],[145.137,43.129],[145.119,43.107],[145.123,43.088],[145.17,43.08],[145.148,43.066],[145.112,43.064],[145.098,43.044],[145.076,43.034],[145.004,43.044],[145.029,43.009],[145.015,42.99],[144.932,42.978],[144.867,42.988],[144.842,43.007],[144.838,43.041],[144.799,43.047],[144.759,43.019],[144.734,42.98],[144.741,42.965],[144.784,42.934],[144.741,42.924],[144.601,42.95],[144.522,42.944],[144.496,42.933],[144.464,42.938],[144.381,42.961],[144.36,43.0],[144.324,43.002],[144.183,42.977],[144.043,42.926],[143.888,42.845],[143.791,42.757],[143.64,42.661],[143.575,42.603],[143.348,42.32],[143.33,42.277],[143.326,42.23],[143.337,42.129],[143.305,42.026],[143.294,42.006],[143.265,41.987],[143.254,41.941],[143.24,41.928],[143.182,41.962],[143.164,41.99],[143.114,42.028],[142.959,42.105],[142.758,42.158],[142.545,42.25],[142.459,42.271],[142.282,42.367],[142.167,42.46],[142.063,42.47],[141.98,42.51],[141.926,42.558],[141.818,42.6],[141.724,42.617],[141.638,42.615],[141.548,42.602],[141.429,42.565],[141.264,42.468],[141.091,42.392],[141.001,42.304],[140.976,42.299],[140.954,42.304],[140.932,42.328],[140.976,42.326],[140.986,42.34],[140.925,42.365],[140.911,42.38],[140.9,42.421],[140.734,42.565],[140.688,42.58],[140.598,42.571],[140.526,42.581],[140.457,42.565],[140.382,42.505],[140.324,42.433],[140.288,42.35],[140.281,42.304],[140.292,42.259],[140.32,42.234],[140.425,42.193],[140.547,42.105],[140.713,42.134],[140.774,42.102],[140.788,42.075],[140.853,42.011],[140.893,41.992],[140.976,41.914],[141.012,41.894],[141.105,41.872],[141.199,41.8],[141.192,41.791],[141.123,41.779],[141.044,41.724],[141.008,41.712],[140.824,41.771],[140.774,41.771],[140.709,41.746],[140.698,41.759],[140.706,41.774],[140.734,41.793],[140.727,41.811],[140.709,41.825],[140.659,41.827],[140.63,41.798],[140.605,41.735],[140.522,41.698],[140.454,41.681],[140.432,41.644],[140.443,41.563],[140.432,41.531],[140.4,41.513],[140.274,41.482],[140.241,41.457],[140.209,41.401],[140.137,41.421],[140.101,41.413],[140.04,41.443],[139.978,41.582],[140.004,41.634],[140.018,41.697],[140.072,41.761],[140.083,41.801],[140.119,41.805],[140.13,41.823],[140.122,41.865],[140.144,41.879],[140.151,41.914],[140.137,41.967],[140.144,41.982],[140.112,42.011],[140.061,42.08],[140.029,42.105],[139.928,42.139],[139.885,42.195],[139.798,42.235],[139.766,42.311],[139.838,42.424],[139.849,42.514],[139.834,42.588],[139.845,42.627],[139.878,42.664],[139.917,42.678],[140.04,42.686],[140.104,42.738],[140.137,42.747],[140.144,42.757],[140.169,42.796],[140.202,42.814],[140.259,42.76],[140.281,42.757],[140.302,42.771],[140.313,42.816],[140.338,42.835],[140.392,42.909],[140.522,42.997],[140.526,43.015],[140.5,43.046],[140.486,43.083],[140.439,43.134],[140.338,43.211],[140.328,43.25],[140.36,43.324],[140.436,43.328],[140.454,43.34],[140.472,43.373],[140.536,43.348],[140.637,43.289],[140.688,43.248],[140.76,43.223],[140.796,43.196],[140.911,43.204],[141.012,43.23],[141.022,43.223],[141.004,43.193],[141.022,43.176],[141.17,43.14],[141.228,43.154],[141.303,43.198],[141.372,43.25],[141.422,43.318],[141.44,43.362],[141.44,43.407],[141.372,43.497],[141.361,43.524],[141.361,43.544],[141.39,43.579],[141.336,43.713],[141.357,43.755],[141.4,43.804],[141.526,43.841],[141.584,43.875],[141.642,43.937],[141.66,43.985],[141.67,44.067],[141.656,44.277],[141.667,44.312],[141.746,44.424],[141.793,44.598],[141.796,44.641],[141.782,44.765],[141.753,44.885],[141.721,44.956],[141.588,45.165],[141.573,45.207],[141.584,45.251],[141.616,45.285],[141.649,45.341],[141.638,45.39],[141.638,45.422],[141.649,45.437],[141.667,45.45],[141.678,45.444],[141.692,45.403],[141.703,45.401],[141.822,45.423],[141.876,45.449],[141.876,45.474],[141.894,45.501],[141.944,45.521],[141.962,45.509],[141.987,45.469],[142.016,45.455],[142.056,45.401],[142.221,45.3],[142.538,45.018],[142.632,44.883],[142.664,44.866],[142.714,44.807],[142.909,44.648],[142.941,44.635],[142.981,44.586],[143.042,44.555],[143.118,44.496],[143.204,44.447],[143.24,44.437],[143.298,44.395],[143.352,44.381],[143.37,44.346],[143.395,44.322],[143.553,44.253],[143.776,44.189],[143.776,44.182],[143.694,44.191],[143.679,44.182],[143.715,44.152],[143.73,44.113],[143.744,44.121],[143.784,44.101],[143.938,44.096],[143.982,44.13],[144.0,44.133],[144.118,44.13],[144.172,44.103],[144.126,44.081],[144.104,44.032],[144.154,44.02],[144.19,44.05],[144.216,44.111],[144.244,44.12],[144.262,44.108],[144.255,44.079],[144.277,44.037],[144.295,44.032],[144.327,43.985],[144.378,43.956],[144.572,43.926],[144.741,43.915],[144.788,43.922],[144.831,43.942],[145.047,44.121],[145.202,44.206],[145.249,44.272],[145.31,44.316],[145.324,44.343],[145.342,44.346],[145.375,44.292],[145.371,44.248],[145.35,44.211],[145.278,44.133],[145.26,44.069],[145.144,43.953],[145.105,43.88],[145.116,43.863],[145.072,43.775],[145.076,43.753],[145.116,43.687],[145.22,43.589],[145.227,43.547],[145.245,43.53],[145.31,43.367],[145.393,43.306],[145.36,43.301],[145.299,43.341],[145.27,43.346],[145.26,43.338],[145.263,43.316],[145.314,43.302],[145.321,43.296],[145.303,43.292],[145.35,43.265],[145.468,43.253],[145.519,43.23],[145.522,43.242],[145.501,43.257],[145.497,43.27],[145.584,43.336],[145.634,43.353],[145.663,43.38],[145.724,43.38],[145.749,43.394]],[[123.814,24.392],[123.872,24.39],[123.933,24.367],[123.937,24.341],[123.872,24.259],[123.685,24.286],[123.667,24.296],[123.685,24.323],[123.692,24.319],[123.699,24.316],[123.706,24.328],[123.728,24.316],[123.742,24.319],[123.771,24.419]],[[124.329,24.583],[124.333,24.571],[124.275,24.488],[124.243,24.363],[124.21,24.336],[124.142,24.341],[124.124,24.36],[124.142,24.385],[124.124,24.414],[124.077,24.429],[124.102,24.446],[124.117,24.468],[124.127,24.47],[124.156,24.441],[124.203,24.443],[124.239,24.495],[124.268,24.51],[124.315,24.588]],[[125.387,24.782],[125.445,24.757],[125.452,24.745],[125.445,24.737],[125.384,24.726],[125.258,24.733],[125.276,24.856],[125.261,24.885],[125.287,24.877],[125.326,24.811],[125.359,24.782]],[[126.809,26.352],[126.795,26.305],[126.77,26.314],[126.759,26.334],[126.705,26.356],[126.698,26.369],[126.723,26.386],[126.77,26.388],[126.802,26.368]],[[128.336,26.797],[128.329,26.786],[128.336,26.765],[128.307,26.717],[128.307,26.7],[128.296,26.702],[128.242,26.633],[128.159,26.619],[128.131,26.58],[128.145,26.574],[128.138,26.553],[128.091,26.543],[128.055,26.55],[127.983,26.479],[127.951,26.467],[127.947,26.45],[127.853,26.442],[127.839,26.425],[127.843,26.417],[127.864,26.407],[127.879,26.352],[127.918,26.31],[127.9,26.305],[127.839,26.324],[127.828,26.317],[127.778,26.233],[127.767,26.197],[127.774,26.185],[127.825,26.187],[127.796,26.14],[127.774,26.121],[127.756,26.125],[127.724,26.089],[127.652,26.084],[127.655,26.121],[127.637,26.214],[127.659,26.212],[127.699,26.277],[127.717,26.275],[127.731,26.29],[127.742,26.32],[127.72,26.407],[127.731,26.44],[127.807,26.447],[127.832,26.489],[127.936,26.531],[127.961,26.564],[127.954,26.594],[127.893,26.609],[127.879,26.695],[127.987,26.694],[128.001,26.68],[127.994,26.64],[128.015,26.634],[128.059,26.645],[128.113,26.673],[128.102,26.692],[128.152,26.731],[128.163,26.758],[128.235,26.813],[128.257,26.886],[128.332,26.813]],[[128.699,27.455],[128.707,27.448],[128.656,27.41],[128.631,27.376],[128.617,27.379],[128.613,27.364],[128.559,27.35],[128.527,27.372],[128.537,27.418],[128.62,27.416]],[[128.987,27.811],[129.031,27.773],[128.991,27.707],[128.948,27.681],[128.93,27.686],[128.915,27.722],[128.894,27.729],[128.897,27.769],[128.879,27.825],[128.894,27.891],[128.948,27.914],[128.966,27.894]],[[129.297,28.119],[129.326,28.124],[129.347,28.107],[129.351,28.087],[129.322,28.078],[129.301,28.1],[129.279,28.077],[129.265,28.098],[129.232,28.097],[129.221,28.098],[129.214,28.141],[129.185,28.174],[129.182,28.19],[129.196,28.195],[129.229,28.195],[129.221,28.176],[129.232,28.171],[129.268,28.174],[129.25,28.144]],[[130.032,28.374],[130.006,28.306],[129.977,28.284],[129.913,28.298]],[[129.707,28.462],[129.722,28.445],[129.715,28.429],[129.693,28.429],[129.621,28.401],[129.61,28.384],[129.581,28.37],[129.553,28.328],[129.499,28.288],[129.448,28.291],[129.455,28.277],[129.448,28.266],[129.419,28.25],[129.466,28.215],[129.405,28.185],[129.401,28.163],[129.373,28.168],[129.351,28.161],[129.376,28.141],[129.376,28.119],[129.286,28.178],[129.279,28.218],[129.268,28.23],[129.257,28.215],[129.207,28.23],[129.16,28.24],[129.146,28.256],[129.207,28.264],[129.272,28.256],[129.29,28.284],[129.254,28.284],[129.229,28.304],[129.265,28.328],[129.297,28.337],[129.333,28.365],[129.398,28.372],[129.412,28.394],[129.452,28.392],[129.477,28.421],[129.481,28.411],[129.517,28.394],[129.535,28.431],[129.625,28.483],[129.614,28.448],[129.632,28.435],[129.675,28.483],[129.671,28.51],[129.689,28.509]],[[130.676,30.375],[130.647,30.29],[130.604,30.253],[130.579,30.236],[130.485,30.226],[130.438,30.24],[130.428,30.255],[130.388,30.339],[130.377,30.395],[130.424,30.398],[130.467,30.457],[130.489,30.457],[130.5,30.468],[130.6,30.412],[130.64,30.403]],[[131.05,30.841],[131.061,30.841],[131.061,30.824],[131.086,30.783],[131.072,30.77],[131.079,30.699],[131.054,30.662],[131.058,30.611],[131.04,30.589],[131.036,30.557],[131.004,30.552],[130.982,30.52],[130.982,30.496],[130.968,30.479],[130.964,30.456],[130.978,30.437],[130.971,30.425],[130.978,30.4],[130.964,30.387],[130.964,30.373],[130.942,30.375],[130.892,30.356],[130.885,30.344],[130.87,30.344],[130.856,30.366],[130.867,30.397],[130.849,30.461],[130.852,30.471],[130.87,30.464],[130.932,30.54],[130.95,30.594],[130.95,30.641],[130.939,30.672],[130.968,30.702],[130.986,30.741],[131.0,30.746],[131.007,30.79]],[[130.154,32.203],[130.186,32.197],[130.19,32.165],[130.168,32.114],[130.136,32.117],[130.129,32.132],[130.132,32.149],[130.114,32.175],[130.114,32.207],[130.132,32.212]],[[130.41,32.512],[130.456,32.526],[130.467,32.512],[130.435,32.492],[130.392,32.398],[130.363,32.376],[130.356,32.425],[130.323,32.409],[130.24,32.396],[130.212,32.436],[130.219,32.457],[130.24,32.46],[130.291,32.497],[130.363,32.528],[130.384,32.509]],[[130.161,32.546],[130.19,32.523],[130.201,32.48],[130.204,32.339],[130.158,32.31],[130.129,32.261],[130.096,32.246],[130.075,32.22],[130.014,32.19],[129.995,32.19],[130.01,32.252],[129.959,32.237],[129.959,32.252],[130.017,32.293],[130.053,32.296],[130.064,32.306],[130.032,32.313],[130.01,32.306],[129.992,32.315],[129.974,32.355],[129.995,32.389],[129.988,32.404],[129.995,32.425],[130.032,32.482],[130.003,32.533],[130.042,32.519],[130.14,32.548]],[[128.879,32.675],[128.897,32.642],[128.818,32.634],[128.815,32.648],[128.779,32.648],[128.771,32.632],[128.797,32.61],[128.789,32.587],[128.771,32.572],[128.735,32.604],[128.663,32.602],[128.653,32.592],[128.599,32.614],[128.624,32.668],[128.635,32.666],[128.635,32.644],[128.638,32.636],[128.656,32.688],[128.642,32.722],[128.649,32.744],[128.642,32.761],[128.66,32.783],[128.678,32.783],[128.699,32.744],[128.779,32.776],[128.807,32.799],[128.811,32.766],[128.843,32.759],[128.851,32.742],[128.843,32.703]],[[139.791,33.136],[139.863,33.107],[139.878,33.088],[139.845,33.046],[139.82,33.041],[139.788,33.058],[139.744,33.119],[139.741,33.134],[139.752,33.146],[139.766,33.151]],[[129.099,32.989],[129.11,32.984],[129.171,33.005],[129.182,32.985],[129.175,32.967],[129.139,32.938],[129.117,32.936],[129.099,32.919],[129.092,32.906],[129.095,32.857],[129.067,32.862],[129.067,32.818],[129.045,32.821],[129.041,32.896],[129.049,32.909],[129.034,32.933],[128.98,32.948],[128.98,32.96],[128.998,32.967],[129.02,32.98],[129.034,32.967],[129.056,32.98],[129.041,33.0],[129.049,33.039],[129.067,33.044],[129.067,33.019],[129.085,33.024],[129.081,33.056],[129.085,33.076],[129.103,33.083],[129.106,33.102],[129.095,33.125],[129.11,33.166],[129.117,33.159],[129.11,33.122],[129.124,33.108],[129.103,33.054]],[[129.556,33.411],[129.563,33.367],[129.527,33.323],[129.538,33.316],[129.513,33.298],[129.491,33.245],[129.448,33.198],[129.376,33.169],[129.344,33.179],[129.351,33.213],[129.383,33.183],[129.401,33.186],[129.405,33.195],[129.376,33.215],[129.394,33.24],[129.416,33.237],[129.405,33.276],[129.437,33.296],[129.441,33.348],[129.495,33.358],[129.509,33.382],[129.524,33.369],[129.538,33.379],[129.524,33.39],[129.524,33.406]],[[129.776,33.774],[129.801,33.765],[129.801,33.752],[129.783,33.738],[129.736,33.737],[129.722,33.716],[129.722,33.698],[129.689,33.716],[129.679,33.73],[129.682,33.743],[129.671,33.75],[129.657,33.743],[129.646,33.772],[129.686,33.759],[129.661,33.784],[129.657,33.816],[129.679,33.814],[129.671,33.833],[129.689,33.872],[129.7,33.862],[129.769,33.845],[129.765,33.802],[129.797,33.786]],[[132.235,33.868],[132.217,33.855],[132.188,33.921],[132.202,33.944],[132.228,33.953],[132.3,33.931],[132.325,33.897],[132.375,33.917],[132.397,33.916],[132.415,33.938],[132.469,33.938],[132.458,33.927],[132.436,33.904],[132.386,33.894],[132.375,33.841],[132.332,33.848],[132.328,33.875],[132.318,33.884],[132.31,33.875],[132.3,33.884],[132.285,33.862]],[[139.489,34.061],[139.496,34.093],[139.525,34.113],[139.557,34.113],[139.575,34.09],[139.561,34.057],[139.536,34.037],[139.507,34.036]],[[132.555,34.071],[132.534,34.083],[132.454,34.088],[132.508,34.132],[132.498,34.157],[132.508,34.167],[132.534,34.177],[132.552,34.171],[132.537,34.157],[132.548,34.145],[132.552,34.108],[132.577,34.118],[132.58,34.1],[132.57,34.076]],[[132.998,34.208],[132.966,34.193],[132.955,34.198],[132.962,34.218],[132.991,34.231],[132.98,34.252],[132.969,34.253],[133.009,34.29],[133.03,34.296],[133.045,34.274],[133.056,34.243],[133.052,34.223],[133.034,34.208]],[[129.311,34.28],[129.315,34.294],[129.347,34.287],[129.319,34.258],[129.326,34.23],[129.297,34.218],[129.304,34.209],[129.297,34.171],[129.286,34.166],[129.275,34.128],[129.247,34.1],[129.221,34.09],[129.211,34.1],[129.189,34.115],[129.171,34.106],[129.175,34.196],[129.207,34.329],[129.229,34.321],[129.225,34.294],[129.275,34.307],[129.268,34.323],[129.279,34.323],[129.301,34.307],[129.301,34.289]],[[135.003,34.608],[135.028,34.591],[135.028,34.579],[135.003,34.552],[134.985,34.505],[134.956,34.485],[134.902,34.419],[134.895,34.373],[134.899,34.35],[134.917,34.338],[134.928,34.309],[134.96,34.27],[134.856,34.236],[134.802,34.201],[134.73,34.191],[134.726,34.209],[134.701,34.221],[134.722,34.253],[134.686,34.243],[134.665,34.265],[134.658,34.289],[134.683,34.328],[134.722,34.329],[134.798,34.448],[134.852,34.476],[134.884,34.53],[134.938,34.551],[134.982,34.603]],[[129.452,34.62],[129.477,34.598],[129.477,34.588],[129.445,34.515],[129.38,34.453],[129.383,34.424],[129.362,34.405],[129.358,34.39],[129.394,34.41],[129.383,34.383],[129.387,34.366],[129.409,34.351],[129.401,34.338],[129.369,34.307],[129.326,34.304],[129.304,34.324],[129.322,34.334],[129.344,34.328],[129.347,34.356],[129.333,34.361],[129.304,34.343],[129.308,34.385],[129.286,34.366],[129.293,34.35],[129.286,34.345],[129.272,34.356],[129.247,34.351],[129.229,34.356],[129.236,34.368],[129.272,34.375],[129.275,34.414],[129.268,34.432],[129.311,34.461],[129.279,34.451],[129.275,34.463],[129.304,34.52],[129.326,34.535],[129.308,34.561],[129.29,34.556],[129.322,34.648],[129.38,34.645],[129.409,34.675],[129.427,34.677],[129.423,34.696],[129.466,34.701],[129.488,34.677],[129.47,34.652],[129.488,34.647],[129.488,34.635],[129.473,34.616]],[[139.417,34.78],[139.438,34.772],[139.456,34.738],[139.456,34.691],[139.453,34.679],[139.442,34.677],[139.42,34.677],[139.359,34.703],[139.352,34.719],[139.356,34.797]],[[133.369,36.275],[133.383,36.258],[133.38,36.209],[133.362,36.192],[133.354,36.204],[133.333,36.199],[133.326,36.192],[133.34,36.175],[133.326,36.158],[133.257,36.165],[133.192,36.205],[133.196,36.278],[133.21,36.297],[133.293,36.342],[133.293,36.33],[133.322,36.322],[133.329,36.305],[133.354,36.295]],[[138.459,38.07],[138.574,38.075],[138.574,38.036],[138.488,37.892],[138.369,37.828],[138.265,37.798],[138.232,37.798],[138.214,37.809],[138.214,37.83],[138.283,37.848],[138.286,37.906],[138.344,37.967],[138.315,37.997],[138.247,37.978],[138.232,38.007],[138.232,38.031],[138.254,38.09],[138.312,38.167],[138.427,38.257],[138.477,38.319],[138.513,38.323],[138.52,38.308],[138.488,38.181],[138.438,38.083],[138.445,38.053]],[[139.55,42.244],[139.564,42.232],[139.521,42.174],[139.51,42.1],[139.492,42.078],[139.456,42.051],[139.446,42.055],[139.435,42.063],[139.424,42.102],[139.424,42.132],[139.41,42.154],[139.424,42.191],[139.453,42.215],[139.51,42.225]],[[141.328,45.172],[141.336,45.158],[141.31,45.124],[141.253,45.099],[141.181,45.126],[141.148,45.146],[141.13,45.17],[141.145,45.19],[141.13,45.211],[141.166,45.239],[141.202,45.249],[141.267,45.226]],[[141.051,45.45],[141.069,45.442],[141.073,45.425],[141.058,45.322],[141.037,45.265],[141.03,45.278],[141.037,45.292],[140.997,45.351],[141.001,45.42],[140.968,45.464],[140.986,45.467],[141.008,45.44]],[[134.366,34.554],[134.37,34.485],[134.348,34.431],[134.334,34.444],[134.305,34.446],[134.326,34.454],[134.33,34.463],[134.319,34.469],[134.298,34.464],[134.262,34.421],[134.244,34.417],[134.244,34.464],[134.222,34.473],[134.172,34.466],[134.161,34.48],[134.172,34.486],[134.175,34.52],[134.204,34.512],[134.283,34.544]],[[129.934,31.867],[129.927,31.864],[129.931,31.827],[129.891,31.81],[129.862,31.82],[129.848,31.844],[129.851,31.857],[129.833,31.844],[129.819,31.845],[129.823,31.862],[129.844,31.881],[129.909,31.845],[129.913,31.867]],[[137.048,37.153],[137.037,37.121],[136.947,37.097],[136.904,37.144],[136.918,37.148],[136.929,37.137],[136.972,37.153],[136.998,37.139],[137.026,37.156]]]}</script>
+<script>
+// [romaji, kanji, título en kanji, título en romaji, título en español, descripción, lat, lon]
+const S = [
+ ["Nihonbashi","日本橋","朝之景","Asa no kei","Vista de la mañana","Kilómetro cero de los caminos de Japón. Al amanecer, la comitiva de un daimio cruza el puente mientras los pescaderos del mercado se apartan con su carga.",35.684,139.774],
+ ["Shinagawa","品川","日之出","Hi no de","Salida del sol","Primera posta, junto al mar. La cola de la procesión pasa frente a las casas de té, con la bahía de Edo y sus veleros a la izquierda.",35.620,139.742],
+ ["Kawasaki","川崎","六郷渡舟","Rokugō watashibune","El transbordador del Rokugō","No había puente sobre el río Rokugō: se cruzaba en barca. Al fondo asoma el Fuji.",35.533,139.703],
+ ["Kanagawa","神奈川","台之景","Dai no kei","Vista desde la colina","Una calle en pendiente llena de casas de té sobre la bahía. Las mujeres de las posadas salen a atraer viajeros.",35.474,139.632],
+ ["Hodogaya","保土ヶ谷","新町橋","Shinmachi-bashi","El puente de Shinmachi","Un palanquín y varios viajeros cruzan el puente hacia la aldea de techos de paja.",35.445,139.596],
+ ["Totsuka","戸塚","元町別道","Motomachi betsudō","El desvío de Motomachi","Un viajero baja del caballo frente a la casa de té Komeya, donde sale el camino hacia Kamakura.",35.396,139.533],
+ ["Fujisawa","藤沢","遊行寺","Yugyōji","El templo Yugyō-ji","Un gran torii marca el desvío hacia el santuario de Enoshima. En la colina, el templo Yugyō-ji.",35.344,139.488],
+ ["Hiratsuka","平塚","縄手道","Nawate michi","El camino entre arrozales","Un correo corre por el dique en zigzag. Detrás, el monte Kōma, redondo, y la cumbre del Fuji.",35.327,139.348],
+ ["Ōiso","大磯","虎ヶ雨","Tora ga ame","La lluvia de Tora","Llueve sobre la costa. La tradición dice que esa lluvia de verano son las lágrimas de Tora Gozen por su amante, Soga Jūrō.",35.309,139.313],
+ ["Odawara","小田原","酒匂川","Sakawagawa","El río Sakawa","Cargadores cruzan el río con palanquines y viajeros a hombros. Detrás, el castillo de Odawara y los montes de Hakone.",35.252,139.155],
+ ["Hakone","箱根","湖水図","Kosui zu","Vista del lago","El paso más duro del camino: una procesión baja entre picos de colores imposibles junto al lago Ashi. Acá estaba el control de Hakone.",35.191,139.026],
+ ["Mishima","三島","朝霧","Asagiri","Niebla de la mañana","Viajeros a caballo y en palanquín pasan frente al torii del santuario de Mishima, apenas siluetas grises en la niebla.",35.119,138.918],
+ ["Numazu","沼津","黄昏図","Tasogare zu","Crepúsculo","Luna llena sobre el río. Un peregrino carga una enorme máscara de tengu rumbo al santuario de Konpira.",35.096,138.862],
+ ["Hara","原","朝之富士","Asa no Fuji","El Fuji por la mañana","El Fuji es tan alto que se sale del marco por arriba. Abajo, dos mujeres y su sirviente caminan junto a los arrozales.",35.128,138.795],
+ ["Yoshiwara","吉原","左富士","Hidari Fuji","El Fuji a la izquierda","El camino gira y, por un tramo, el Fuji queda a la izquierda del viajero. Tres chicos van montados en un mismo caballo.",35.163,138.690],
+ ["Kanbara","蒲原","夜之雪","Yoru no yuki","Nieve de noche","Una de las láminas más famosas: la aldea bajo una nevada silenciosa. Curiosamente, en Kanbara casi nunca nieva.",35.118,138.606],
+ ["Yui","由井","薩埵嶺","Satta mine","El paso de Satta","Desde el acantilado, dos viajeros se asoman a la bahía de Suruga, con veleros y el Fuji enfrente.",35.106,138.556],
+ ["Okitsu","興津","興津川","Okitsugawa","El río Okitsu","Dos luchadores de sumo cruzan el río, uno a caballo y otro en un palanquín que los cargadores apenas pueden llevar.",35.050,138.508],
+ ["Ejiri","江尻","三保遠望","Miho enbō","Vista lejana de Miho","El puerto de Shimizu visto desde lo alto, con los veleros y la península de Miho, famosa por sus pinos.",35.019,138.486],
+ ["Fuchū","府中","安部川","Abekawa","El río Abe","Otro río sin puente: los viajeros cruzan a hombros de cargadores, en palanquín o a caballo.",34.975,138.383],
+ ["Mariko","鞠子","名物茶店","Meibutsu chamise","La casa de té famosa","Bajo un ciruelo en flor, dos viajeros comen tororo-jiru, la sopa de ñame rallado que hizo famosa a esta posta.",34.947,138.334],
+ ["Okabe","岡部","宇津之山","Utsu no yama","El monte Utsu","Un sendero estrecho entre montañas, junto a un arroyo. Los leñadores bajan con su carga.",34.918,138.284],
+ ["Fujieda","藤枝","人馬継立","Jinba tsugitate","Relevo de caballos y cargadores","En cada posta se cambiaban caballos y porteadores. Acá se ve el trajín del relevo frente a la oficina de la posta.",34.868,138.257],
+ ["Shimada","嶋田","大井川駿岸","Ōigawa Sungan","El río Ōi, orilla de Suruga","El shogunato no permitía puentes sobre el Ōi. Una multitud cruza el lecho del río; con las crecidas, se esperaba días.",34.836,138.177],
+ ["Kanaya","金谷","大井川遠岸","Ōigawa engan","El río Ōi, orilla lejana","La otra orilla del Ōi: la procesión llega a tierra firme después del cruce.",34.820,138.128],
+ ["Nissaka","日坂","佐夜ノ中山","Sayo no Nakayama","El paso de Sayo no Nakayama","Una cuesta empinadísima. En medio del camino está la Yonaki-ishi, la piedra que según la leyenda llora de noche.",34.788,138.055],
+ ["Kakegawa","掛川","秋葉山遠望","Akibayama enbō","Vista lejana del monte Akiba","Viajeros cruzan el puente de Ōike mientras una cometa sube al cielo. Al fondo, el monte Akiba.",34.769,138.014],
+ ["Fukuroi","袋井","出茶屋ノ図","Dejaya no zu","Puesto de té al paso","Una tetera cuelga de la rama de un árbol sobre el fuego. Los cargadores descansan junto al camino.",34.750,137.926],
+ ["Mitsuke","見附","天竜川図","Tenryūgawa zu","El río Tenryū","Barqueros esperan en los bancos de arena para cruzar el ancho río Tenryū.",34.718,137.851],
+ ["Hamamatsu","浜松","冬枯ノ図","Fuyugare no zu","Paisaje de invierno","Campesinos se calientan alrededor de una fogata al pie de un gran cedro, en un campo pelado por el invierno.",34.710,137.726],
+ ["Maisaka","舞坂","今切真景","Imagiri shinkei","Vista de Imagiri","Montañas sobre el agua en Imagiri, donde el lago Hamana se abrió al mar con el terremoto de 1498. Desde acá se cruzaba en barca.",34.685,137.612],
+ ["Arai","荒井","渡舟ノ図","Toshū no zu","El transbordador","La barca de un daimio, con cortinas y emblemas, cruza el lago Hamana hacia el control de Arai.",34.692,137.562],
+ ["Shirasuka","白須賀","汐見阪図","Shiomizaka zu","La cuesta de Shiomi","Una procesión baja la cuesta y se abre, por fin, la vista del mar abierto.",34.692,137.480],
+ ["Futagawa","二川","猿ヶ馬場","Saru ga baba","El páramo de Sarugababa","Tres músicas ambulantes cruzan un páramo de matorrales junto a una casa de té.",34.722,137.420],
+ ["Yoshida","吉田","豊川橋","Toyokawa-bashi","El puente del Toyokawa","Obreros en andamios reparan el castillo de Yoshida, sobre el puente del río Toyokawa.",34.769,137.392],
+ ["Goyu","御油","旅人留女","Tabibito tomeonna","Mujeres que retienen a los viajeros","Al caer la tarde, las mujeres de las posadas arrastran a los viajeros, literalmente, para que se alojen.",34.837,137.314],
+ ["Akasaka","赤坂","旅舎招婦ノ図","Ryosha shōfu no zu","Posada con anfitrionas","El interior de una posada: en el patio crece una gran cícada, un viajero descansa y las anfitrionas se preparan.",34.851,137.304],
+ ["Fujikawa","藤川","棒鼻ノ図","Bōbana no zu","La entrada del pueblo","En el límite de la posta, la gente se arrodilla al paso de la comitiva que lleva caballos de regalo al emperador.",34.906,137.220],
+ ["Okazaki","岡崎","矢矧之橋","Yahagi no hashi","El puente de Yahagi","El puente más largo del camino, sobre el río Yahagi, con el castillo de Okazaki detrás.",34.955,137.160],
+ ["Chiryū","池鯉鮒","首夏馬市","Shuka umaichi","Feria de caballos a comienzos del verano","Una tropilla en el campo, alrededor de un árbol: la feria anual de caballos de Chiryū.",35.000,137.050],
+ ["Narumi","鳴海","名物有松絞","Meibutsu Arimatsu shibori","Las telas teñidas de Arimatsu","Tiendas de telas teñidas con la técnica shibori, la especialidad de la zona. Mujeres viajeras pasan frente a ellas.",35.075,136.952],
+ ["Miya","宮","熱田神事","Atsuta shinji","La fiesta del santuario de Atsuta","Hombres corren junto a caballos en la fiesta del santuario de Atsuta. De acá salía el barco hacia Kuwana.",35.125,136.905],
+ ["Kuwana","桑名","七里渡口","Shichiri no watashiguchi","El embarcadero de los siete ri","Grandes barcos llegan a Kuwana después de cruzar siete ri, unos 27 km, por la bahía de Ise.",35.066,136.693],
+ ["Yokkaichi","四日市","三重川","Mie-gawa","El río Mie","Un viento fuerte dobla los juncos y un viajero corre detrás de su sombrero por el dique.",34.965,136.622],
+ ["Ishiyakushi","石薬師","石薬師寺","Ishiyakushi-ji","El templo de Ishiyakushi","El templo entre árboles, al pie de las montañas, en tiempo de cosecha.",34.905,136.535],
+ ["Shōno","庄野","白雨","Hakuu","Chaparrón","Un aguacero repentino: cargadores y viajeros suben la cuesta corriendo bajo la lluvia inclinada. Una de las obras maestras de la serie.",34.875,136.519],
+ ["Kameyama","亀山","雪晴","Yuki bare","Cielo claro después de la nieve","Una procesión sube la ladera nevada hacia el castillo, bajo un cielo despejado.",34.855,136.452],
+ ["Seki","関","本陣早立","Honjin hayadachi","Partida temprana de la posada principal","Antes del amanecer, la comitiva de un daimio se prepara para salir del honjin, la posada reservada a los señores.",34.852,136.392],
+ ["Sakanoshita","坂之下","筆捨嶺","Fudesute mine","El pico Fudesute","Su nombre quiere decir donde se tiró el pincel: según la leyenda, el pintor Kanō Motonobu no logró pintarlo y abandonó el pincel.",34.887,136.330],
+ ["Tsuchiyama","土山","春之雨","Haru no ame","Lluvia de primavera","Una procesión cruza un puente bajo la lluvia, después de pasar las montañas de Suzuka.",34.936,136.283],
+ ["Minakuchi","水口","名物干瓢","Meibutsu kanpyō","El kanpyō, especialidad local","Mujeres cortan calabazas en tiras largas y las ponen a secar: es el kanpyō, especialidad de la posta.",34.966,136.166],
+ ["Ishibe","石部","目川ノ里","Megawa no sato","La aldea de Megawa","Viajeros pasan frente a una casa de té de la aldea de Megawa, conocida por su tofu asado.",35.010,136.050],
+ ["Kusatsu","草津","名物立場","Meibutsu tateba","La parada famosa","Cargadores pasan corriendo con un palanquín frente a la casa de té Ubagamochi, famosa por sus dulces de arroz.",35.018,135.960],
+ ["Ōtsu","大津","走井茶店","Hashirii chamise","La casa de té de Hashirii","Carretas de bueyes cargadas de arroz pasan frente a la casa de té del manantial Hashirii, cerca del lago Biwa.",35.000,135.860],
+ ["Kioto","京師","三条大橋","Sanjō Ōhashi","El gran puente de Sanjō","Fin del camino: el puente de Sanjō sobre el río Kamo, con las colinas de Higashiyama. En el cuadro, justo debajo, está la postal 56.",35.009,135.772],
+ ["Postal 56","旅","","","Fin del camino, vista del atardecer","La postal que completa el cuadro. Dos viajeros se detienen en una loma junto a un pino; uno señala el Fuji del otro lado de la bahía, mientras otro caminante sigue por la playa.",null,null]
+];
+// colección de la que viene cada escaneo (dominio público, Wikimedia Commons)
+const CRED = ["British Museum", "Minneapolis Institute of Art", "British Museum", "British Museum", "British Museum", "Museum of Fine Arts, Boston", "British Museum", "British Museum", "British Museum", "British Museum", "Museum of Fine Arts, Boston", "Metropolitan Museum of Art, Nueva York", "British Museum", "Museum of Fine Arts, Boston", "British Museum", "Museum of Fine Arts, Boston", "Harvard Art Museums", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Honolulu Museum of Art", "Museo Edo-Tokio", "Biblioteca Metropolitana de Tokio", "Biblioteca del Congreso, Washington", "Museum of Fine Arts, Boston", "British Museum", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Metropolitan Museum of Art, Nueva York", "Museum of Fine Arts, Boston", "Biblioteca Metropolitana de Tokio", "Biblioteca Metropolitana de Tokio", "Museum of Fine Arts, Boston", "Museo Edo-Tokio", "Museum of Fine Arts, Boston", "Metropolitan Museum of Art, Nueva York", "Museum of Fine Arts, Boston", "Museo Edo-Tokio", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museo Edo-Tokio", "Museum of Fine Arts, Boston", "Biblioteca Metropolitana de Tokio", "Museo Edo-Tokio", "Museo Edo-Tokio", "Museum of Fine Arts, Boston", "Biblioteca Metropolitana de Tokio", "Metropolitan Museum of Art, Nueva York", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston", "Museum of Fine Arts, Boston"];
+// distancias tradicionales entre postas consecutivas, en km
+const SEG = [7.9,9.8,9.7,4.9,8.8,7.8,13.7,2.9,15.6,16.5,14.8,5.8,5.9,11.8,11.1,3.9,9.1,4.1,10.5,5.6,7.8,6.7,8.7,3.9,6.5,7.1,9.6,5.8,16.4,11.0,5.9,6.5,5.8,6.1,10.2,1.7,8.8,6.6,15.0,11.0,6.5,27.5,12.6,10.8,2.7,7.8,5.9,6.5,9.8,10.6,13.1,11.8,14.4,11.8];
+const KM = [0]; SEG.forEach((d, i) => KM.push(KM[i] + d));
+const TOTAL = Math.round(KM[54]);
+const SEA = new Set([30, 41]);          // tramos en barco: Maisaka-Arai y Miya-Kuwana
+const LEGS = [
+  ["Salida de Edo", "La bahía de Edo y las primeras postas, entre el mar y los arrozales."],
+  ["Hakone", "El paso de montaña, el control y la llegada a la llanura del Fuji."],
+  ["Bajo el Fuji", "La bahía de Suruga, con el Fuji siempre a la vista."],
+  ["Los ríos sin puente", "Desfiladeros y el gran cruce del río Ōi."],
+  ["El lago Hamana", "Ríos anchos, la barca de Imagiri y la costa abierta."],
+  ["Mikawa y Owari", "Posadas, ferias de caballos y telas teñidas."],
+  ["Ise y Suzuka", "Siete ri por mar y las montañas de Suzuka."],
+  ["La llegada", "Del lago Biwa al puente de Sanjō, en Kioto."]
+];
+const $ = (q, el = document) => el.querySelector(q);
+const pos = i => ({ col: Math.floor(i / 7) + 1, row: (i % 7) + 1 });
+const label = i => i === 0 ? "Lámina 1 · Salida" : i === 54 ? "Lámina 55 · Llegada" : i === 55 ? "Postal 56" : `Lámina ${i + 1} · Posta ${i}`;
+const kmText = i => i === 55 ? "Después de Kioto" : i === 0 ? "0 km" : `≈ ${Math.round(KM[i])} km`;
+const img = i => i === 55 ? "img/s55b.jpg" : `img/h${String(i).padStart(2, "0")}.jpg`;
+const subtitle = s => s[2] ? `<span lang="ja">${s[2]}</span> ${s[3]} · <em>${s[4]}</em>` : `<em>${s[4]}</em>`;
+
+// ---------- el cuadro: 8 columnas x 7 filas sobre la foto rectificada
+const CW = 212, CH = 136, GAP = 8, BW = 8 * CW + 9 * GAP, BH = 7 * CH + 8 * GAP;   // medidas de img/cuadro2.jpg
+const board = $("#board");
+S.forEach((s, i) => {
+  const c = Math.floor(i / 7), r = i % 7;
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "hot" + (i === 55 ? " is-56" : "");
+  b.style.left = ((GAP + c * (CW + GAP)) / BW * 100) + "%"; b.style.width = (CW / BW * 100) + "%";
+  b.style.top = ((GAP + r * (CH + GAP)) / BH * 100) + "%"; b.style.height = (CH / BH * 100) + "%";
+  b.setAttribute("aria-label", `${label(i)}: ${s[0]}`);
+  b.innerHTML = `<span>${i + 1}</span>`;
+  b.addEventListener("click", () => openSheet(i));
+  board.appendChild(b);
+});
+const toggle = $("#toggle-nums");
+toggle.addEventListener("change", () => board.classList.toggle("show-nums", toggle.checked));
+
+// ---------- el viaje: tramos por columna del cuadro
+const legs = $("#legs");
+LEGS.forEach(([name, intro], c) => {
+  const sec = document.createElement("section");
+  sec.className = "leg";
+  const first = c * 7, last = Math.min(c * 7 + 6, 55);
+  let html = `<header class="leg-head"><p class="eyebrow">Columna ${c + 1} del cuadro</p><h3>${name}</h3><p>${intro}</p></header>`;
+  for (let i = first; i <= last; i++) {
+    const s = S[i], p = pos(i);
+    html += `<article class="stop" id="p${i + 1}" data-i="${i}">
+      <button type="button" class="thumb" data-open="${i}" aria-label="Ver ${s[0]} más grande"><img loading="lazy" src="${img(i)}" alt="Lámina de ${s[0]}, edición Hoeidō"></button>
+      <div class="stop-body">
+        <p class="stop-num">${label(i)} · ${kmText(i)}</p>
+        <h4>${s[0]}${i < 55 ? ` <span lang="ja">${s[1]}</span>` : ""}</h4>
+        <p class="stop-title">${subtitle(s)}</p>
+        <p class="stop-desc">${s[5]}</p>
+        <p class="stop-pos">En el cuadro: columna ${p.col}, fila ${p.row}</p>
+      </div></article>`;
+  }
+  sec.innerHTML = html;
+  legs.appendChild(sec);
+});
+legs.addEventListener("click", e => { const t = e.target.closest("[data-open]"); if (t) openSheet(+t.dataset.open); });
+
+// ---------- mapa: proyección simple de latitud y longitud
+const svg = $("#map"), NS = "http://www.w3.org/2000/svg";
+const LON0 = 135.62, LON1 = 139.92, LAT0 = 34.36, LAT1 = 35.80, K = Math.cos(35.2 * Math.PI / 180);
+const sx = 960 / ((LON1 - LON0) * K);
+const P = (lat, lon) => [20 + (lon - LON0) * K * sx, 20 + (LAT1 - lat) * sx];
+const el = (tag, attrs, parent = svg) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+const H = Math.ceil(P(LAT0, LON0)[1] + 20); svg.setAttribute("viewBox", `0 0 1000 ${H}`);
+const GEO = JSON.parse(document.getElementById("geo").textContent);
+el("rect", { x: -20, y: -20, width: 1040, height: H + 40, class: "seabg" });
+const ringP = r => "M" + r.map(([lo, la]) => P(la, lo).map(v => v.toFixed(1)).join(",")).join("L") + "Z";
+el("path", { d: GEO.jp.map(ringP).join(""), class: "land" });
+const biwa = [[35.00,135.87],[35.08,135.93],[35.14,135.97],[35.21,136.03],[35.29,136.09],[35.37,136.16],[35.44,136.23],[35.51,136.27],[35.53,136.20],[35.46,136.10],[35.39,136.03],[35.31,135.98],[35.21,135.93],[35.10,135.89]];
+el("path", { d: "M" + biwa.map(([a, o]) => P(a, o).join(",")).join(" L") + " Z", class: "lake" });
+const ham = P(34.75, 137.59); el("ellipse", { cx: ham[0], cy: ham[1], rx: 10, ry: 14, class: "lake" });
+const fj = P(35.3606, 138.7274);
+el("path", { d: `M${fj[0] - 34},${fj[1] + 22} L${fj[0] - 6},${fj[1] - 22} L${fj[0] + 6},${fj[1] - 22} L${fj[0] + 34},${fj[1] + 22} Z`, class: "fuji" });
+el("path", { d: `M${fj[0] - 13},${fj[1] - 7} L${fj[0] - 6},${fj[1] - 22} L${fj[0] + 6},${fj[1] - 22} L${fj[0] + 13},${fj[1] - 7} L${fj[0] + 6},${fj[1] - 11} L${fj[0]},${fj[1] - 6} L${fj[0] - 6},${fj[1] - 11} Z`, class: "fuji-snow" });
+el("text", { x: fj[0] + 40, y: fj[1] - 2, class: "maplbl" }).textContent = "Fuji";
+const pts = S.slice(0, 55).map(s => P(s[6], s[7]));
+const segEls = [];
+for (let i = 0; i < 54; i++) {
+  segEls.push(el("line", { x1: pts[i][0], y1: pts[i][1], x2: pts[i + 1][0], y2: pts[i + 1][1], class: "route" + (SEA.has(i) ? " sea" : "") }));
+}
+const dots = pts.map((p, i) => {
+  const d = el("circle", { cx: p[0], cy: p[1], r: i === 0 || i === 54 ? 8 : 5.5, class: "stn" });
+  d.addEventListener("click", () => openSheet(i));
+  const t = el("title", {}, d); t.textContent = S[i][0];
+  return d;
+});
+el("text", { x: pts[0][0] - 22, y: pts[0][1] - 20, class: "maplbl ja", "text-anchor": "end" }).textContent = "江戸";
+el("text", { x: pts[0][0] - 22, y: pts[0][1] + 8, class: "maplbl", "text-anchor": "end" }).textContent = "Edo";
+el("text", { x: pts[54][0] + 2, y: pts[54][1] - 22, class: "maplbl ja", "text-anchor": "middle" }).textContent = "京";
+el("text", { x: pts[54][0] + 2, y: pts[54][1] + 38, class: "maplbl", "text-anchor": "middle" }).textContent = "Kioto";
+const bw = P(35.36, 136.25); el("text", { x: bw[0] + 22, y: bw[1], class: "maplbl" }).textContent = "Biwa";
+const pac = P(34.47, 137.9); el("text", { x: pac[0], y: pac[1], class: "maplbl", "font-style": "italic", "text-anchor": "middle" }).textContent = "Océano Pacífico";
+// leyenda: tramos en barco
+const lg = P(34.43, 138.98);
+el("line", { x1: lg[0], y1: lg[1] - 7, x2: lg[0] + 44, y2: lg[1] - 7, class: "route sea" });
+el("text", { x: lg[0] + 54, y: lg[1], class: "legend" }).textContent = "en barco";
+const trav = el("g", { class: "traveler" });
+el("circle", { cx: 0, cy: 0, r: 12, "fill-opacity": .25 }, trav);
+el("circle", { cx: 0, cy: 0, r: 7 }, trav);
+
+const numLbl = el("text", { x: 0, y: 0, class: "numlbl", "text-anchor": "middle" });
+let current = -1;
+function setCurrent(i) {
+  const j = Math.min(i, 54);
+  if (i === current) return;
+  current = i;
+  segEls.forEach((s, k) => s.classList.toggle("done", k < j && !SEA.has(k)));
+  dots.forEach((d, k) => { d.classList.toggle("on", k === j); d.setAttribute("r", k === j ? 9 : (k === 0 || k === 54 ? 8 : 5.5)); });
+  numLbl.textContent = j > 0 && j < 54 ? j : "";
+  numLbl.setAttribute("x", pts[j][0]); numLbl.setAttribute("y", pts[j][1] - 17);
+  trav.style.transform = `translate(${pts[j][0]}px, ${pts[j][1]}px)`;
+  $("#now-name").textContent = i === 55 ? "Postal 56" : S[j][0];
+  $("#now-km").textContent = i === 55 ? `${TOTAL} km recorridos` : `${j === 0 ? "Salida · 0" : j === 54 ? "Llegada · ≈ " + Math.round(KM[j]) : "Posta " + j + " · ≈ " + Math.round(KM[j])} km de ${TOTAL}`;
+  document.querySelectorAll(".stop.is-on").forEach(n => n.classList.remove("is-on"));
+  const st = document.getElementById("p" + (i + 1)); if (st) st.classList.add("is-on");
+}
+setCurrent(0);
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) setCurrent(+e.target.dataset.i); });
+}, { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll(".stop").forEach(n => io.observe(n));
+
+// ---------- ficha
+const sheet = $("#sheet"), scrim = $("#scrim");
+let open = -1, lastFocus = null;
+function fillSheet(i) {
+  const s = S[i], p = pos(i);
+  $("#sh-num").textContent = label(i);
+  const im = $("#sh-img"); im.src = img(i); im.alt = `Lámina de ${s[0]}, edición Hoeidō`;
+  $("#sh-cred").textContent = i === 55 ? "Postal 56, diseñada para este cuadro" : `Impresión de la edición Hoeidō · ${CRED[i]}`;
+  $("#sh-title").innerHTML = s[0] + (i < 55 ? ` <span lang="ja">${s[1]}</span>` : "");
+  $("#sh-sub").innerHTML = subtitle(s);
+  $("#sh-desc").textContent = s[5];
+  $("#sh-km").textContent = kmText(i);
+  $("#sh-pos").textContent = `Columna ${p.col}, fila ${p.row}`;
+  $("#sh-prev").disabled = i === 0; $("#sh-next").disabled = i === 55;
+}
+function openSheet(i) {
+  if (open < 0) lastFocus = document.activeElement;
+  open = i; fillSheet(i);
+  sheet.hidden = false; scrim.hidden = false;
+  $("#sh-close").focus({ preventScroll: true });
+}
+function closeSheet() {
+  sheet.hidden = true; scrim.hidden = true; open = -1;
+  if (lastFocus) lastFocus.focus({ preventScroll: true });
+}
+const step = d => { if (open < 0) return; const n = Math.max(0, Math.min(55, open + d)); if (n !== open) { open = n; fillSheet(n); } };
+$("#sh-close").addEventListener("click", closeSheet);
+scrim.addEventListener("click", closeSheet);
+$("#sh-prev").addEventListener("click", () => step(-1));
+$("#sh-next").addEventListener("click", () => step(1));
+document.addEventListener("keydown", e => {
+  if (open < 0) return;
+  if (e.key === "Escape") closeSheet();
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+let tx = null;
+sheet.addEventListener("touchstart", e => { tx = e.touches[0].clientX; }, { passive: true });
+sheet.addEventListener("touchend", e => {
+  if (tx === null) return;
+  const dx = e.changedTouches[0].clientX - tx; tx = null;
+  if (Math.abs(dx) > 60) step(dx < 0 ? 1 : -1);
+});
+
+// ---------- planchas
+const layers = [...document.querySelectorAll("#press-stage img")];
+const stepBtns = [...document.querySelectorAll("#steps button")];
+let timer = null;
+function showPlate(n) {
+  layers.forEach((im, k) => im.classList.toggle("on", k <= n));
+  stepBtns.forEach((b, k) => b.setAttribute("aria-pressed", String(k === n)));
+}
+stepBtns.forEach(b => b.addEventListener("click", () => { clearInterval(timer); showPlate(+b.dataset.step); }));
+$("#press-run").addEventListener("click", () => {
+  clearInterval(timer);
+  let n = 0; showPlate(0);
+  timer = setInterval(() => { n++; showPlate(n); if (n >= 5) clearInterval(timer); }, 1100);
+});
+
+// ---------- mapa con zoom: Japón entero, acercamiento y recorrido posta por posta
+(function () {
+  const stage = $("#zstage"), zs = $("#zsvg"), inset = $("#zinset");
+  const C36 = Math.cos(36 * Math.PI / 180);
+  const X = lon => (lon - 137) * 111.32 * C36, Y = lat => (36 - lat) * 110.57;
+  const ring = r => "M" + r.map(([lo, la]) => X(lo).toFixed(1) + "," + Y(la).toFixed(1)).join("L") + "Z";
+  const mk = (tag, attrs, parent = zs) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+  const box = (lo0, la0, lo1, la1) => ({ x0: X(lo0), x1: X(lo1), y0: Y(la1), y1: Y(la0) });
+  const B0 = box(126.5, 30.4, 148.6, 45.6), B1 = box(135.4, 34.45, 140.15, 35.9);
+  function fit(b, A) {
+    let w = b.x1 - b.x0, h = b.y1 - b.y0;
+    const cx = (b.x0 + b.x1) / 2, cy = (b.y0 + b.y1) / 2;
+    if (w / h < A) w = h * A; else h = w / A;
+    w *= 1.1; h *= 1.1;
+    return [cx - w / 2, cy - h / 2, w, h];
+  }
+  const aspect = () => (stage.clientWidth || 800) / (stage.clientHeight || 450);
+
+  // tierra: vecinos tenues y Japón
+  for (const svgEl of [zs, inset]) {
+    mk("rect", { x: -3000, y: -3000, width: 6000, height: 6000, class: "seabg" }, svgEl);
+    mk("path", { d: GEO.nb.map(ring).join(""), class: "land nb" }, svgEl);
+    mk("path", { d: GEO.jp.map(ring).join(""), class: "land" }, svgEl);
+  }
+  mk("path", { d: ring(biwa.map(([la, lo]) => [lo, la])), class: "lake" });
+  const iv = fit(B0, 1); inset.setAttribute("viewBox", iv.join(" "));
+  mk("rect", { x: B1.x0, y: B1.y0, width: B1.x1 - B1.x0, height: B1.y1 - B1.y0, class: "zrect" }, inset);
+  const rect = mk("rect", { x: B1.x0 - 8, y: B1.y0 - 8, width: B1.x1 - B1.x0 + 16, height: B1.y1 - B1.y0 + 16, class: "zrect" });
+
+  // camino: tramos y postas, ocultos hasta que el viajero llega
+  const Z = S.slice(0, 55).map(s => [X(s[7]), Y(s[6])]);
+  const segs = [], dots = [];
+  for (let i = 0; i < 54; i++) segs.push(mk("line", { x1: Z[i][0], y1: Z[i][1], x2: Z[i][0], y2: Z[i][1], class: "zseg" + (SEA.has(i) ? " sea" : ""), opacity: 0 }));
+  for (let i = 0; i < 55; i++) dots.push(mk("circle", { cx: Z[i][0], cy: Z[i][1], r: 1, class: "zdot", opacity: 0 }));
+
+  // rótulos: [texto, lon, lat, fase (0 Japón, 1 camino), clase, tamaño en px, ancla]
+  const L = [
+    ["JAPÓN", 140.2, 39.6, 0, "big", 18, "middle"], ["Corea", 127.9, 36.4, 0, "", 13, "middle"],
+    ["Mar de Japón", 134.2, 40.2, 0, "it", 13, "middle"], ["Océano Pacífico", 142.8, 32.4, 0, "it", 13, "middle"],
+    ["Tokio", 140.15, 35.55, 0, "", 12, "start"], ["Kioto", 135.45, 35.2, 0, "", 12, "end"],
+    ["Edo (Tokio)", 139.74, 35.8, 1, "", 13, "middle"], ["Kioto", 135.77, 35.11, 1, "", 13, "middle"],
+    ["Fuji", 138.78, 35.43, 1, "", 12, "start"], ["Lago Biwa", 136.3, 35.47, 1, "", 12, "start"],
+    ["Bahía de Ise", 136.78, 34.72, 1, "it", 12, "middle"], ["Bahía de Suruga", 138.55, 34.8, 1, "it", 12, "middle"],
+    ["Océano Pacífico", 137.6, 34.55, 1, "it", 13, "middle"]
+  ].map(([t, lo, la, ph, cls, px, anchor]) => {
+    const n = mk("text", { x: X(lo), y: Y(la), class: "zl " + cls, "text-anchor": anchor });
+    n.textContent = t; return { n, ph, px };
+  });
+  const pins = [[139.77, 35.68], [135.77, 35.01]].map(([lo, la]) => mk("circle", { cx: X(lo), cy: Y(la), r: 1, class: "zpin" }));
+  const fuji = mk("path", { d: "", class: "fuji" });
+  const now = mk("text", { x: 0, y: 0, class: "zl now", "text-anchor": "middle", opacity: 0 });
+
+  let vb = fit(B0, aspect()), state = "idle", raf = 0, t0 = 0;
+  function setView(v) {
+    vb = v; zs.setAttribute("viewBox", v.map(n => n.toFixed(2)).join(" "));
+    const k = v[2] / (stage.clientWidth || 800);
+    L.forEach(l => { l.n.setAttribute("font-size", l.px * k); l.n.setAttribute("stroke-width", 3.5 * k); });
+    now.setAttribute("font-size", 15 * k); now.setAttribute("stroke-width", 4 * k);
+    dots.forEach((d, i) => d.setAttribute("r", (i === 0 || i === 54 ? 4.6 : 3.4) * k));
+    pins.forEach(p => p.setAttribute("r", 3.6 * k));
+    const fx = X(138.7274), fy = Y(35.3606), f = 9 * k;
+    fuji.setAttribute("d", `M${fx - 1.6 * f},${fy + f} L${fx - .3 * f},${fy - f} L${fx + .3 * f},${fy - f} L${fx + 1.6 * f},${fy + f} Z`);
+  }
+  function phase(u) {           // u: 0 = Japón, 1 = camino
+    L.forEach(l => l.n.setAttribute("opacity", l.ph === 0 ? Math.max(0, 1 - u * 2) : Math.max(0, u * 2 - 1)));
+    pins.forEach(p => p.setAttribute("opacity", Math.max(0, 1 - u * 2)));
+    rect.setAttribute("opacity", Math.max(0, 1 - u * 1.4));
+    fuji.setAttribute("opacity", Math.max(0, u * 2 - 1));
+  }
+  function route(p) {           // p: 0..1, avance uniforme por posta
+    const s = p * 54, k = Math.min(53, Math.floor(s)), fr = p >= 1 ? 1 : s - k;
+    segs.forEach((g, i) => {
+      if (i < k) { g.setAttribute("x2", Z[i + 1][0]); g.setAttribute("y2", Z[i + 1][1]); g.setAttribute("opacity", 1); }
+      else if (i === k) { g.setAttribute("x2", Z[i][0] + (Z[i + 1][0] - Z[i][0]) * fr); g.setAttribute("y2", Z[i][1] + (Z[i + 1][1] - Z[i][1]) * fr); g.setAttribute("opacity", 1); }
+      else g.setAttribute("opacity", 0);
+    });
+    const cur = p >= 1 ? 54 : (fr > .5 ? k + 1 : k);
+    dots.forEach((d, i) => { d.setAttribute("opacity", i <= cur ? 1 : 0); d.classList.toggle("on", i === cur); });
+    now.textContent = S[cur][0];
+    now.setAttribute("x", Z[cur][0]); now.setAttribute("y", Z[cur][1] - 11 * vb[2] / (stage.clientWidth || 800));
+    now.setAttribute("opacity", cur === 0 || cur === 54 ? 0 : 1);
+    $("#z-name").textContent = cur === 0 ? "Nihonbashi, Edo" : S[cur][0];
+    $("#z-km").textContent = cur === 0 ? "Salida · 0 km" : cur === 54 ? `Llegada · ≈ ${TOTAL} km en unas dos semanas` : `Posta ${cur} de 53 · ≈ ${Math.round(KM[cur])} km`;
+  }
+  const lerpView = (a, b, u) => {
+    const w = Math.exp(Math.log(a[2]) + (Math.log(b[2]) - Math.log(a[2])) * u);
+    const h = w * a[3] / a[2];
+    const ca = [a[0] + a[2] / 2, a[1] + a[3] / 2], cb = [b[0] + b[2] / 2, b[1] + b[3] / 2];
+    const cx = ca[0] + (cb[0] - ca[0]) * u, cy = ca[1] + (cb[1] - ca[1]) * u;
+    return [cx - w / 2, cy - h / 2, w, h];
+  };
+  const ease = u => u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+  const HOLD = 1400, ZOOM = 3000, ROUTE = 9000;
+
+  function reset() {
+    setView(fit(B0, aspect())); phase(0);
+    segs.forEach(g => g.setAttribute("opacity", 0)); dots.forEach(d => d.setAttribute("opacity", 0));
+    now.setAttribute("opacity", 0); inset.classList.remove("on");
+    $("#z-name").textContent = "Japón"; $("#z-km").textContent = "El Tōkaidō, en el centro de la isla de Honshu";
+  }
+  function finish() {
+    state = "done"; setView(fit(B1, aspect())); phase(1); route(1); inset.classList.add("on");
+    $("#z-play").textContent = "Repetir el recorrido";
+  }
+  function tick(t) {
+    const e = t - t0, V0 = fit(B0, aspect()), V1 = fit(B1, aspect());
+    if (e < HOLD) { setView(V0); phase(0); }
+    else if (e < HOLD + ZOOM) { const u = ease((e - HOLD) / ZOOM); setView(lerpView(V0, V1, u)); phase(u); if (u > .7) inset.classList.add("on"); }
+    else if (e < HOLD + ZOOM + ROUTE) { setView(V1); phase(1); route((e - HOLD - ZOOM) / ROUTE); }
+    else { finish(); return; }
+    raf = requestAnimationFrame(tick);
+  }
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function play() {
+    cancelAnimationFrame(raf);
+    if (reduce) { finish(); return; }
+    reset(); state = "playing"; $("#z-play").textContent = "Repetir el recorrido";
+    t0 = performance.now(); raf = requestAnimationFrame(tick);
+  }
+  $("#z-play").addEventListener("click", play);
+  reset();
+  new ResizeObserver(() => {
+    if (state === "idle") setView(fit(B0, aspect()));
+    else if (state === "done") { setView(fit(B1, aspect())); route(1); }
+  }).observe(stage);
+  if (!reduce && "IntersectionObserver" in window) {
+    const once = new IntersectionObserver(es => {
+      if (es.some(e => e.isIntersecting) && state === "idle") { once.disconnect(); setTimeout(play, 300); }
+    }, { threshold: .6 });
+    once.observe(stage);
+  }
+})();
+</script>
+
+</body>
+</html>
